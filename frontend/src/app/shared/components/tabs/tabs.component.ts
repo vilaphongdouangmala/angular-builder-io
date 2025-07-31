@@ -47,9 +47,9 @@ export interface Tab {
           </svg>
 
           <span class="flex-1 text-sm font-normal"
-                [class.text-primary-teal]="tab.active"
+                [class.text-teal-700]="tab.active"
                 [class.font-semibold]="tab.active"
-                [class.text-neutrals-300]="!tab.active">{{ tab.label }}</span>
+                [class.text-gray-600]="!tab.active">{{ tab.label }}</span>
           
           <span *ngIf="tab.active && tab.id === 'building'" 
                 class="flex h-4 px-1 items-center rounded-full bg-red-500">

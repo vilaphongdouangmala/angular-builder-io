@@ -1,0 +1,285 @@
+<div class="flex flex-col bg-bg-gray min-h-screen">
+  <!-- Title and Actions -->
+  <div class="flex items-center gap-6 p-6 bg-white border-b border-neutrals-50">
+    <!-- Title -->
+    <div class="flex flex-col gap-2">
+      <h1 class="text-2xl font-bold text-neutrals-900 font-bai-jamjuree">Customer</h1>
+    </div>
+    
+    <!-- Right Actions -->
+    <div class="flex justify-end items-end gap-2 flex-1">
+      <!-- Filter Dropdown -->
+      <div class="flex items-start gap-1.5 w-96">
+        <div class="flex flex-col justify-center items-start gap-1 flex-1">
+          <div class="flex p-3 items-center gap-2 self-stretch rounded-lg border border-neutrals-50 bg-white">
+            <div class="flex-1 text-neutrals-300 font-bai-jamjuree text-base font-normal">User</div>
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9L12 15L18 9" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        
+        <!-- Filter Button -->
+        <div class="flex w-11 h-11 flex-col justify-center items-center flex-shrink-0">
+          <button (click)="onFilter()" class="flex p-2.5 flex-col justify-center items-center gap-2 flex-1 self-stretch rounded-lg border border-neutrals-50 bg-white">
+            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15.0002 11.6667C15.9206 11.6667 16.6668 10.9205 16.6668 10C16.6668 9.07952 15.9206 8.33333 15.0002 8.33333C14.0797 8.33333 13.3335 9.07952 13.3335 10C13.3335 10.9205 14.0797 11.6667 15.0002 11.6667Z" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8.33317 5.83333C9.25365 5.83333 9.99984 5.08714 9.99984 4.16667C9.99984 3.24619 9.25365 2.5 8.33317 2.5C7.4127 2.5 6.6665 3.24619 6.6665 4.16667C6.6665 5.08714 7.4127 5.83333 8.33317 5.83333Z" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2.5 4.16667H4.16667" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12.5 4.16667L16.6667 4.16667" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2.5 10L10.8333 10" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10.0002 17.5C10.9206 17.5 11.6668 16.7538 11.6668 15.8333C11.6668 14.9129 10.9206 14.1667 10.0002 14.1667C9.07969 14.1667 8.3335 14.9129 8.3335 15.8333C8.3335 16.7538 9.07969 17.5 10.0002 17.5Z" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2.5 15.8333H5.83333" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M14.1665 15.8333L16.6665 15.8333" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Create Button -->
+      <button (click)="onCreate()" class="flex h-11 items-start">
+        <div class="flex p-2.5 px-4 items-center gap-2 self-stretch rounded-lg bg-primary-teal">
+          <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 10H10M15 10H10M10 10V5M10 10V15" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="text-white text-center font-bai-jamjuree text-base font-semibold">Create</div>
+        </div>
+      </button>
+      
+      <!-- More Options -->
+      <button class="flex h-11 py-2 px-3.5 items-center gap-1.5 rounded-lg bg-gray-100">
+        <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.99984 8.33333C8.18393 8.33333 8.33317 8.18409 8.33317 8C8.33317 7.8159 8.18393 7.66667 7.99984 7.66667C7.81574 7.66667 7.6665 7.8159 7.6665 8C7.6665 8.18409 7.81574 8.33333 7.99984 8.33333Z" fill="#175252" stroke="#175252" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7.99984 12.3333C8.18393 12.3333 8.33317 12.1841 8.33317 12C8.33317 11.8159 8.18393 11.6667 7.99984 11.6667C7.81574 11.6667 7.6665 11.8159 7.6665 12C7.6665 12.1841 7.81574 12.3333 7.99984 12.3333Z" fill="#175252" stroke="#175252" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7.99984 4.33333C8.18393 4.33333 8.33317 4.1841 8.33317 4C8.33317 3.81591 8.18393 3.66667 7.99984 3.66667C7.81574 3.66667 7.6665 3.81591 7.6665 4C7.6665 4.1841 7.81574 4.33333 7.99984 4.33333Z" fill="#175252" stroke="#175252" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Secondary Actions Bar -->
+  <div class="flex justify-between items-start p-6 bg-white border-b border-neutrals-50">
+    <!-- Download Button -->
+    <button (click)="onDownload()" class="flex flex-col items-start">
+      <div class="flex h-8 p-2 flex-col items-center gap-1 rounded-lg border border-neutrals-50 bg-white">
+        <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 13.3333L12 13.3333" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7.99984 2.66667V10.6667M7.99984 10.6667L10.3332 8.33333M7.99984 10.6667L5.6665 8.33333" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </button>
+
+    <!-- Spacer -->
+    <div class="flex h-8 items-start gap-2.5 flex-1"></div>
+
+    <!-- Save Search -->
+    <button class="flex items-start">
+      <div class="flex h-8 py-1.5 px-4 items-center gap-2 rounded-lg border border-neutrals-50 bg-white">
+        <div class="text-neutrals-300 text-center font-bai-jamjuree text-xs font-semibold">Save Search Name 1</div>
+      </div>
+    </button>
+
+    <!-- Sort Controls -->
+    <div class="flex items-start gap-2">
+      <!-- Sort Toggle -->
+      <button class="flex flex-col items-start">
+        <div class="flex h-8 p-2 flex-col items-center gap-1 rounded-lg border border-neutrals-50 bg-white">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.3335 13.3333V2.66667M11.3335 2.66667L13.3335 4.66667M11.3335 2.66667L9.3335 4.66667" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4.6665 2.66667V13.3333M4.6665 13.3333L6.6665 11.3333M4.6665 13.3333L2.6665 11.3333" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </button>
+
+      <!-- Sort By Name -->
+      <button (click)="onSort('name')" class="flex w-33 h-8 py-1.5 px-4 items-center gap-2 rounded-lg border border-neutrals-50 bg-white">
+        <div class="flex-1 text-neutrals-300 font-bai-jamjuree text-xs font-semibold">Name</div>
+        <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 6L8 10L12 6" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 p-6">
+    <!-- Table -->
+    <div class="flex flex-col items-start self-stretch rounded-xl shadow-panel">
+      <div class="flex h-[673px] items-start self-stretch">
+        <!-- Name Column -->
+        <div class="flex flex-col items-start flex-1">
+          <!-- Header -->
+          <div class="flex h-13 py-3.5 px-4 items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
+            <div class="flex-1 text-black-500 font-bai-jamjuree text-sm font-bold">Name</div>
+          </div>
+          <!-- Rows -->
+          <div *ngFor="let customer of customers" class="flex h-13 py-2 px-4 items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
+            <div class="flex items-center gap-2 flex-1">
+              <div class="flex flex-col items-start gap-1 flex-1">
+                <div class="text-black-500 font-bai-jamjuree text-sm font-medium">{{ customer.name }}</div>
+                <div class="text-neutrals-300 font-bai-jamjuree text-xs overflow-hidden text-ellipsis whitespace-nowrap self-stretch">Room number: {{ customer.roomNumber }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email Column -->
+        <div class="flex w-61 flex-col items-start">
+          <!-- Header -->
+          <div class="flex h-13 py-3.5 px-4 items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
+            <div class="text-black-500 font-bai-jamjuree text-sm font-bold">Email</div>
+          </div>
+          <!-- Rows -->
+          <div *ngFor="let customer of customers" class="flex h-13 py-2 px-4 items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
+            <div class="flex items-center gap-2 flex-1">
+              <div class="flex flex-col items-start gap-1 flex-1">
+                <div class="text-black-500 font-bai-jamjuree text-sm font-medium overflow-hidden text-ellipsis whitespace-nowrap self-stretch">{{ customer.email }}</div>
+                <div class="text-neutrals-300 font-bai-jamjuree text-xs">{{ customer.phone }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resident Type Column -->
+        <div class="flex w-44 flex-col items-start">
+          <!-- Header -->
+          <div class="flex h-13 py-3.5 px-4 items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
+            <div class="text-black-500 font-bai-jamjuree text-sm font-bold">Resident type</div>
+          </div>
+          <!-- Rows -->
+          <div *ngFor="let customer of customers" class="flex h-13 py-2 px-4 items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
+            <div class="flex items-center gap-2 flex-1">
+              <div class="flex flex-col items-start gap-1 flex-1">
+                <div class="text-black-500 font-bai-jamjuree text-sm font-medium overflow-hidden text-ellipsis whitespace-nowrap self-stretch">{{ customer.residentType }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Column -->
+        <div class="flex w-21 flex-col items-start">
+          <!-- Header -->
+          <div class="flex h-13 py-3.5 px-4 justify-center items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
+            <div class="text-black-500 font-bai-jamjuree text-sm font-bold">Action</div>
+          </div>
+          <!-- Rows -->
+          <div *ngFor="let customer of customers" class="flex h-13 py-2 px-4 justify-center items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
+            <button (click)="onCustomerAction(customer, 'more')" class="w-5 h-5">
+              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.0002 10.4167C10.2303 10.4167 10.4168 10.2301 10.4168 10C10.4168 9.76988 10.2303 9.58333 10.0002 9.58333C9.77004 9.58333 9.5835 9.76988 9.5835 10C9.5835 10.2301 9.77004 10.4167 10.0002 10.4167Z" fill="#55596D" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10.0002 15.4167C10.2303 15.4167 10.4168 15.2301 10.4168 15C10.4168 14.7699 10.2303 14.5833 10.0002 14.5833C9.77004 14.5833 9.5835 14.7699 9.5835 15C9.5835 15.2301 9.77004 15.4167 10.0002 15.4167Z" fill="#55596D" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10.0002 5.41666C10.2303 5.41666 10.4168 5.23011 10.4168 4.99999C10.4168 4.76988 10.2303 4.58333 10.0002 4.58333C9.77004 4.58333 9.5835 4.76988 9.5835 4.99999C9.5835 5.23011 9.77004 5.41666 10.0002 5.41666Z" fill="#55596D" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer / Pagination -->
+      <div class="flex py-4.5 px-6 items-center gap-3 self-stretch border-t border-neutrals-50 bg-white">
+        <!-- Left side - Showing info -->
+        <div class="flex items-center gap-2 flex-1">
+          <div class="flex items-center gap-2.5">
+            <div class="flex items-center gap-2">
+              <div class="text-gray-500 text-center font-bai-jamjuree text-xs font-semibold">Showing</div>
+              
+              <!-- Items per page dropdown -->
+              <div class="flex items-start">
+                <div class="flex h-8 py-1.5 px-4 items-center gap-2 rounded-lg border border-neutrals-50 bg-white">
+                  <div class="text-neutrals-300 text-center font-bai-jamjuree text-xs font-semibold">{{ itemsPerPage }}</div>
+                  <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 6L8 10L12 6" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              
+              <div class="text-gray-500 text-center font-bai-jamjuree text-xs font-semibold">from {{ totalItems }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right side - Pagination -->
+        <div class="flex w-114.25 items-center gap-2">
+          <!-- First page -->
+          <button class="flex flex-col items-start">
+            <div class="flex h-8 p-2 flex-col items-center gap-1 rounded-lg border border-neutrals-50 bg-white">
+              <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.3335 4L3.3335 8L7.3335 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12.6665 4L8.6665 8L12.6665 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </button>
+
+          <!-- Previous page -->
+          <button class="flex flex-col items-start">
+            <div class="flex h-8 p-2 flex-col items-center gap-1 rounded-lg border border-neutrals-50 bg-white">
+              <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 4L6 8L10 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </button>
+
+          <!-- Page 1 (active) -->
+          <button class="flex w-8 items-start flex-shrink-0">
+            <div class="flex h-8 py-1.5 px-4 justify-center items-center gap-2 flex-1 rounded-lg border border-blue-300 bg-white">
+              <div class="text-blue-300 text-center font-bai-jamjuree text-xs font-semibold">1</div>
+            </div>
+          </button>
+
+          <!-- Page 2 -->
+          <button class="flex w-8 items-start flex-shrink-0">
+            <div class="flex h-8 py-1.5 px-4 justify-center items-center gap-2 flex-1 rounded-lg border border-neutrals-50 bg-white">
+              <div class="text-neutrals-300 text-center font-bai-jamjuree text-xs font-semibold">2</div>
+            </div>
+          </button>
+
+          <!-- Page 3 -->
+          <button class="flex w-8 items-start flex-shrink-0">
+            <div class="flex h-8 py-1.5 px-4 justify-center items-center gap-2 flex-1 rounded-lg border border-neutrals-50 bg-white">
+              <div class="text-neutrals-300 text-center font-bai-jamjuree text-xs font-semibold">3</div>
+            </div>
+          </button>
+
+          <!-- Page 4 -->
+          <button class="flex w-8 items-start flex-shrink-0">
+            <div class="flex h-8 py-1.5 px-4 justify-center items-center gap-2 flex-1 rounded-lg border border-neutrals-50 bg-white">
+              <div class="text-neutrals-300 text-center font-bai-jamjuree text-xs font-semibold">4</div>
+            </div>
+          </button>
+
+          <!-- Next page -->
+          <button class="flex flex-col items-start">
+            <div class="flex h-8 p-2 flex-col items-center gap-1 rounded-lg border border-neutrals-50 bg-white">
+              <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 4L10 8L6 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </button>
+
+          <!-- Last page -->
+          <button class="flex flex-col items-start">
+            <div class="flex h-8 p-2 flex-col items-center gap-1 rounded-lg border border-neutrals-50 bg-white">
+              <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.6665 4L12.6665 8L8.6665 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3.3335 4L7.3335 8L3.3335 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </button>
+
+          <!-- Jump to page -->
+          <div class="flex items-start flex-1">
+            <div class="flex h-8 py-1.5 px-4 justify-between items-center flex-1 rounded-lg border border-neutrals-50 bg-white">
+              <div class="text-neutrals-300 text-center font-bai-jamjuree text-xs font-semibold">1</div>
+              <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.3332 5.33333L7.99984 2L4.6665 5.33333" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M11.3332 10.6667L7.99984 14L4.6665 10.6667" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="text-gray-500 text-center font-bai-jamjuree text-xs font-semibold">of {{ totalPages }} pages</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -21,6 +21,7 @@ interface NavItem {
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
+  constructor(private router: Router) {}
   mainNavItems: NavItem[] = [
     { label: 'Newsfeed', badge: '99+', badgeType: 'default' },
     { label: 'Announcement', badge: '3', badgeType: 'alert' },

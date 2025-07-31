@@ -36,11 +36,11 @@ export class SidebarComponent {
     { label: 'Department' },
     { label: 'User' },
     { label: 'Approval' },
-    { label: 'Customer' },
+    { label: 'Customer', icon: 'group', active: true, route: '/customer' },
     { label: 'CC Group' },
     { label: 'All Memos' },
     { label: 'Upload Memo Type' },
-    { label: 'Master data', icon: 'database', active: true },
+    { label: 'Master data', icon: 'database', active: false, route: '/master-data' },
     { label: 'Invoice' },
     { label: 'Others' }
   ];

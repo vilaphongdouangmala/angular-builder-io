@@ -1,0 +1,74 @@
+// Tabs Component Styles
+.tabs {
+  // Additional custom styles can be added here if needed
+  // Currently using TailwindCSS utility classes
+}
+
+// Tab item animations
+.tab-item {
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  
+  &:hover {
+    transform: translateX(2px);
+  }
+  
+  &.active {
+    background: linear-gradient(135deg, #f0fdfa 0%, #e6fffa 100%);
+    border-left: 3px solid #175252;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(23, 82, 82, 0.05) 0%, rgba(23, 82, 82, 0.02) 100%);
+      border-radius: 0.5rem;
+      pointer-events: none;
+    }
+  }
+}
+
+// Icon transitions
+svg {
+  transition: all 0.2s ease-in-out;
+}
+
+// Badge styling
+.tab-badge {
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.2);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+// Text transitions
+span {
+  transition: all 0.2s ease-in-out;
+}
+
+// Focus states for accessibility
+.tab-item:focus {
+  outline: 2px solid #175252;
+  outline-offset: -2px;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .tab-item {
+    padding: 0.75rem 1rem;
+  }
+  
+  .tab-label {
+    font-size: 0.75rem;
+  }
+}

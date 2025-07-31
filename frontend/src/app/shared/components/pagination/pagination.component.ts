@@ -23,7 +23,7 @@ import { CommonModule } from '@angular/common';
       <!-- Pagination Controls -->
       <div class="flex items-center gap-2 w-114.25">
         <!-- First Page -->
-        <button class="flex h-8 p-2 items-center rounded-lg border border-neutrals-50 bg-white cursor-pointer disabled:opacity-50"
+        <button class="flex h-8 p-2 items-center rounded-lg border border-gray-200 bg-white cursor-pointer disabled:opacity-50"
                 [disabled]="currentPage === 1"
                 (click)="onPageChange(1)">
           <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
@@ -33,7 +33,7 @@ import { CommonModule } from '@angular/common';
         </button>
 
         <!-- Previous Page -->
-        <button class="flex h-8 p-2 items-center rounded-lg border border-neutrals-50 bg-white cursor-pointer disabled:opacity-50"
+        <button class="flex h-8 p-2 items-center rounded-lg border border-gray-200 bg-white cursor-pointer disabled:opacity-50"
                 [disabled]="currentPage === 1"
                 (click)="onPageChange(currentPage - 1)">
           <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
@@ -47,15 +47,15 @@ import { CommonModule } from '@angular/common';
                 [class.border-black]="page === currentPage"
                 [class.bg-gray-200]="page === currentPage"
                 [class.text-black]="page === currentPage"
-                [class.border-neutrals-50]="page !== currentPage"
+                [class.border-gray-200]="page !== currentPage"
                 [class.bg-white]="page !== currentPage"
-                [class.text-neutrals-300]="page !== currentPage"
+                [class.text-gray-600]="page !== currentPage"
                 (click)="onPageChange(page)">
           {{ page }}
         </button>
 
         <!-- Next Page -->
-        <button class="flex h-8 p-2 items-center rounded-lg border border-neutrals-50 bg-white cursor-pointer disabled:opacity-50"
+        <button class="flex h-8 p-2 items-center rounded-lg border border-gray-200 bg-white cursor-pointer disabled:opacity-50"
                 [disabled]="currentPage === totalPages"
                 (click)="onPageChange(currentPage + 1)">
           <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
@@ -64,7 +64,7 @@ import { CommonModule } from '@angular/common';
         </button>
 
         <!-- Last Page -->
-        <button class="flex h-8 p-2 items-center rounded-lg border border-neutrals-50 bg-white cursor-pointer disabled:opacity-50"
+        <button class="flex h-8 p-2 items-center rounded-lg border border-gray-200 bg-white cursor-pointer disabled:opacity-50"
                 [disabled]="currentPage === totalPages"
                 (click)="onPageChange(totalPages)">
           <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
@@ -74,7 +74,7 @@ import { CommonModule } from '@angular/common';
         </button>
 
         <!-- Page Selector -->
-        <select class="flex h-8 py-1.5 px-4 justify-between items-center flex-1 rounded-lg border border-neutrals-50 bg-white text-neutrals-300 text-xs font-bold"
+        <select class="flex h-8 py-1.5 px-4 justify-between items-center flex-1 rounded-lg border border-gray-200 bg-white text-gray-600 text-xs font-bold"
                 [value]="currentPage"
                 (change)="onPageChange(+$any($event.target).value)">
           <option *ngFor="let page of getAllPages()" [value]="page">{{ page }}</option>

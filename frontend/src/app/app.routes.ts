@@ -10,8 +10,12 @@ export const routes: Routes = [
         loadComponent: () => import('./features/master-data/master-data.component').then(m => m.MasterDataComponent)
       },
       {
+        path: 'customer',
+        loadComponent: () => import('./features/customer/customer.component').then(m => m.CustomerComponent)
+      },
+      {
         path: '',
-        redirectTo: '/master-data',
+        redirectTo: '/customer',
         pathMatch: 'full'
       }
     ]

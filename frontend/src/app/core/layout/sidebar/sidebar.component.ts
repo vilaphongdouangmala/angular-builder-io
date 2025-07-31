@@ -52,4 +52,14 @@ export class SidebarComponent {
     { label: 'Operation Log', badge: '3', badgeType: 'alert' },
     { label: 'Configuration', badge: '3', badgeType: 'alert' }
   ];
+
+  onNavItemClick(item: NavItem) {
+    if (item.route) {
+      // Update active states
+      this.managementItems.forEach(navItem => {
+        navItem.active = navItem === item;
+      });
+      this.router.navigate([item.route]);
+    }
+  }
 }

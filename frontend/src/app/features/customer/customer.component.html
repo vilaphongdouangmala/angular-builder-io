@@ -103,183 +103,20 @@
 
   <!-- Main Content -->
   <div class="flex-1 p-6">
-    <!-- Table -->
-    <div class="flex flex-col items-start self-stretch rounded-xl shadow-panel">
-      <div class="flex h-[673px] items-start self-stretch">
-        <!-- Name Column -->
-        <div class="flex flex-col items-start flex-1">
-          <!-- Header -->
-          <div class="flex h-13 py-3.5 px-4 items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
-            <div class="flex-1 text-black-500 font-bai-jamjuree text-sm font-bold">Name</div>
-          </div>
-          <!-- Rows -->
-          <div *ngFor="let customer of customers" class="flex h-13 py-2 px-4 items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
-            <div class="flex items-center gap-2 flex-1">
-              <div class="flex flex-col items-start gap-1 flex-1">
-                <div class="text-black-500 font-bai-jamjuree text-sm font-medium">{{ customer.name }}</div>
-                <div class="text-neutrals-300 font-bai-jamjuree text-xs overflow-hidden text-ellipsis whitespace-nowrap self-stretch">Room number: {{ customer.roomNumber }}</div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- Data Table -->
+    <app-data-table
+      [columns]="tableColumns"
+      [data]="displayedCustomers">
+    </app-data-table>
 
-        <!-- Email Column -->
-        <div class="flex w-61 flex-col items-start">
-          <!-- Header -->
-          <div class="flex h-13 py-3.5 px-4 items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
-            <div class="text-black-500 font-bai-jamjuree text-sm font-bold">Email</div>
-          </div>
-          <!-- Rows -->
-          <div *ngFor="let customer of customers" class="flex h-13 py-2 px-4 items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
-            <div class="flex items-center gap-2 flex-1">
-              <div class="flex flex-col items-start gap-1 flex-1">
-                <div class="text-black-500 font-bai-jamjuree text-sm font-medium overflow-hidden text-ellipsis whitespace-nowrap self-stretch">{{ customer.email }}</div>
-                <div class="text-neutrals-300 font-bai-jamjuree text-xs">{{ customer.phone }}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Resident Type Column -->
-        <div class="flex w-44 flex-col items-start">
-          <!-- Header -->
-          <div class="flex h-13 py-3.5 px-4 items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
-            <div class="text-black-500 font-bai-jamjuree text-sm font-bold">Resident type</div>
-          </div>
-          <!-- Rows -->
-          <div *ngFor="let customer of customers" class="flex h-13 py-2 px-4 items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
-            <div class="flex items-center gap-2 flex-1">
-              <div class="flex flex-col items-start gap-1 flex-1">
-                <div class="text-black-500 font-bai-jamjuree text-sm font-medium overflow-hidden text-ellipsis whitespace-nowrap self-stretch">{{ customer.residentType }}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Action Column -->
-        <div class="flex w-21 flex-col items-start">
-          <!-- Header -->
-          <div class="flex h-13 py-3.5 px-4 justify-center items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
-            <div class="text-black-500 font-bai-jamjuree text-sm font-bold">Action</div>
-          </div>
-          <!-- Rows -->
-          <div *ngFor="let customer of customers" class="flex h-13 py-2 px-4 justify-center items-center gap-2 self-stretch border-b border-neutrals-50 bg-white">
-            <button (click)="onCustomerAction(customer, 'more')" class="w-5 h-5">
-              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10.0002 10.4167C10.2303 10.4167 10.4168 10.2301 10.4168 10C10.4168 9.76988 10.2303 9.58333 10.0002 9.58333C9.77004 9.58333 9.5835 9.76988 9.5835 10C9.5835 10.2301 9.77004 10.4167 10.0002 10.4167Z" fill="#55596D" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M10.0002 15.4167C10.2303 15.4167 10.4168 15.2301 10.4168 15C10.4168 14.7699 10.2303 14.5833 10.0002 14.5833C9.77004 14.5833 9.5835 14.7699 9.5835 15C9.5835 15.2301 9.77004 15.4167 10.0002 15.4167Z" fill="#55596D" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M10.0002 5.41666C10.2303 5.41666 10.4168 5.23011 10.4168 4.99999C10.4168 4.76988 10.2303 4.58333 10.0002 4.58333C9.77004 4.58333 9.5835 4.76988 9.5835 4.99999C9.5835 5.23011 9.77004 5.41666 10.0002 5.41666Z" fill="#55596D" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Footer / Pagination -->
-      <div class="flex py-4.5 px-6 items-center gap-3 self-stretch border-t border-neutrals-50 bg-white">
-        <!-- Left side - Showing info -->
-        <div class="flex items-center gap-2 flex-1">
-          <div class="flex items-center gap-2.5">
-            <div class="flex items-center gap-2">
-              <div class="text-gray-500 text-center font-bai-jamjuree text-xs font-semibold">Showing</div>
-              
-              <!-- Items per page dropdown -->
-              <div class="flex items-start">
-                <div class="flex h-8 py-1.5 px-4 items-center gap-2 rounded-lg border border-neutrals-50 bg-white">
-                  <div class="text-neutrals-300 text-center font-bai-jamjuree text-xs font-semibold">{{ itemsPerPage }}</div>
-                  <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 6L8 10L12 6" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-              </div>
-              
-              <div class="text-gray-500 text-center font-bai-jamjuree text-xs font-semibold">from {{ totalItems }}</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right side - Pagination -->
-        <div class="flex w-114.25 items-center gap-2">
-          <!-- First page -->
-          <button class="flex flex-col items-start">
-            <div class="flex h-8 p-2 flex-col items-center gap-1 rounded-lg border border-neutrals-50 bg-white">
-              <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.3335 4L3.3335 8L7.3335 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12.6665 4L8.6665 8L12.6665 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-          </button>
-
-          <!-- Previous page -->
-          <button class="flex flex-col items-start">
-            <div class="flex h-8 p-2 flex-col items-center gap-1 rounded-lg border border-neutrals-50 bg-white">
-              <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M10 4L6 8L10 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-          </button>
-
-          <!-- Page 1 (active) -->
-          <button class="flex w-8 items-start flex-shrink-0">
-            <div class="flex h-8 py-1.5 px-4 justify-center items-center gap-2 flex-1 rounded-lg border border-blue-300 bg-white">
-              <div class="text-blue-300 text-center font-bai-jamjuree text-xs font-semibold">1</div>
-            </div>
-          </button>
-
-          <!-- Page 2 -->
-          <button class="flex w-8 items-start flex-shrink-0">
-            <div class="flex h-8 py-1.5 px-4 justify-center items-center gap-2 flex-1 rounded-lg border border-neutrals-50 bg-white">
-              <div class="text-neutrals-300 text-center font-bai-jamjuree text-xs font-semibold">2</div>
-            </div>
-          </button>
-
-          <!-- Page 3 -->
-          <button class="flex w-8 items-start flex-shrink-0">
-            <div class="flex h-8 py-1.5 px-4 justify-center items-center gap-2 flex-1 rounded-lg border border-neutrals-50 bg-white">
-              <div class="text-neutrals-300 text-center font-bai-jamjuree text-xs font-semibold">3</div>
-            </div>
-          </button>
-
-          <!-- Page 4 -->
-          <button class="flex w-8 items-start flex-shrink-0">
-            <div class="flex h-8 py-1.5 px-4 justify-center items-center gap-2 flex-1 rounded-lg border border-neutrals-50 bg-white">
-              <div class="text-neutrals-300 text-center font-bai-jamjuree text-xs font-semibold">4</div>
-            </div>
-          </button>
-
-          <!-- Next page -->
-          <button class="flex flex-col items-start">
-            <div class="flex h-8 p-2 flex-col items-center gap-1 rounded-lg border border-neutrals-50 bg-white">
-              <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 4L10 8L6 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-          </button>
-
-          <!-- Last page -->
-          <button class="flex flex-col items-start">
-            <div class="flex h-8 p-2 flex-col items-center gap-1 rounded-lg border border-neutrals-50 bg-white">
-              <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8.6665 4L12.6665 8L8.6665 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M3.3335 4L7.3335 8L3.3335 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-          </button>
-
-          <!-- Jump to page -->
-          <div class="flex items-start flex-1">
-            <div class="flex h-8 py-1.5 px-4 justify-between items-center flex-1 rounded-lg border border-neutrals-50 bg-white">
-              <div class="text-neutrals-300 text-center font-bai-jamjuree text-xs font-semibold">1</div>
-              <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.3332 5.33333L7.99984 2L4.6665 5.33333" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M11.3332 10.6667L7.99984 14L4.6665 10.6667" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-          </div>
-
-          <div class="text-gray-500 text-center font-bai-jamjuree text-xs font-semibold">of {{ totalPages }} pages</div>
-        </div>
-      </div>
-    </div>
+    <!-- Pagination -->
+    <app-pagination
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      [totalItems]="totalItems"
+      [itemsPerPage]="itemsPerPage"
+      (pageChange)="onPageChange($event)"
+      (itemsPerPageChange)="onItemsPerPageChange($event)">
+    </app-pagination>
   </div>
 </div>

@@ -43,12 +43,12 @@ interface NavItem {
           </div>
         </div>
 
-        <div class="w-61 h-px bg-gray-400"></div>
+        <div class="w-60 h-px bg-gray-300"></div>
 
         <!-- Management Section -->
         <div class="flex flex-col items-start gap-2 self-stretch">
           <div class="flex h-12 px-4 pr-4 pl-1.5 justify-between items-center self-stretch rounded-lg bg-white cursor-pointer hover:bg-gray-50">
-            <span class="text-neutrals-300 font-normal text-base">Management</span>
+            <span class="text-gray-600 font-normal text-base">Management</span>
           </div>
           
           <div *ngFor="let item of managementItems" 
@@ -67,13 +67,13 @@ interface NavItem {
               </ng-container>
             </svg>
             
-            <span class="text-neutrals-300 font-normal text-base flex-1"
-                  [class.text-primary-teal]="item.active"
+            <span class="text-gray-600 font-normal text-base flex-1"
+                  [class.text-teal-700]="item.active"
                   [class.font-semibold]="item.active">{{ item.label }}</span>
           </div>
         </div>
 
-        <div class="w-61 h-px bg-gray-400"></div>
+        <div class="w-60 h-px bg-gray-300"></div>
 
         <!-- Dashboard Section -->
         <div class="flex flex-col items-start gap-2 self-stretch">
@@ -83,7 +83,7 @@ interface NavItem {
               <svg *ngIf="item.icon" class="w-6 h-6" viewBox="0 0 24 24" fill="none">
                 <path d="M9 21H15M9 21V16M9 21H3.6C3.26863 21 3 20.7314 3 20.4V16.6C3 16.2686 3.26863 16 3.6 16H9M15 21V9M15 21H20.4C20.7314 21 21 20.7314 21 20.4V3.6C21 3.26863 20.7314 3 20.4 3H15.6C15.2686 3 15 3.26863 15 3.6V9M15 9H9.6C9.26863 9 9 9.26863 9 9.6V16" stroke="#55596D" stroke-width="1.5"/>
               </svg>
-              <span class="text-neutrals-300 font-normal text-base">{{ item.label }}</span>
+              <span class="text-gray-600 font-normal text-base">{{ item.label }}</span>
             </div>
             <div *ngIf="item.badge" class="flex h-4 px-1 items-center rounded-full border-red-50 bg-red-50">
               <span class="text-red-500 text-xs font-bold">{{ item.badge }}</span>
@@ -91,14 +91,14 @@ interface NavItem {
           </div>
         </div>
 
-        <div class="w-61 h-px bg-gray-400"></div>
+        <div class="w-60 h-px bg-gray-300"></div>
 
         <!-- Contact Section -->
         <div class="flex flex-col items-start gap-2 self-stretch">
           <div class="flex h-12 px-4 pr-4 pl-1.5 items-center gap-2 self-stretch rounded-lg bg-white cursor-pointer hover:bg-gray-50">
-            <span class="text-neutrals-300 font-normal text-base">e-Contact</span>
+            <span class="text-gray-600 font-normal text-base">e-Contact</span>
             <div class="flex h-4 px-1 items-center rounded-full border border-gray-300 bg-white">
-              <span class="text-neutrals-200 text-xs font-bold">3</span>
+              <span class="text-gray-500 text-xs font-bold">3</span>
             </div>
           </div>
         </div>

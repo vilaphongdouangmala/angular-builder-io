@@ -13,7 +13,7 @@ export interface Tab {
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="flex py-4 px-2.5 flex-col items-center gap-6 self-stretch rounded-xl border border-neutrals-50 bg-white">
+    <div class="flex py-4 px-2.5 flex-col items-center gap-6 self-stretch rounded-xl border border-gray-200 bg-white">
       <div class="flex flex-col items-start gap-2 self-stretch">
         <div *ngFor="let tab of tabs" 
              class="flex h-11 py-1.5 px-4 items-center gap-2 self-stretch rounded-lg cursor-pointer"

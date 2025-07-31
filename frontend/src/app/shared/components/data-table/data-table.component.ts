@@ -21,10 +21,10 @@ export interface TableData {
       <table class="w-full border-collapse">
         <thead class="bg-white">
           <tr>
-            <th *ngFor="let column of columns" 
-                class="py-3.5 px-4 text-left border-b border-neutrals-50 text-black-500 text-sm font-bold bg-white"
+            <th *ngFor="let column of columns"
+                class="py-3.5 px-4 text-left border-b border-gray-200 text-gray-900 text-sm font-bold bg-white"
                 [class.w-12]="column.width === 'xs'"
-                [class.w-70]="column.width === 'lg'"
+                [class.w-72]="column.width === 'lg'"
                 [class.w-20]="column.width === 'sm'"
                 [class.text-center]="column.align === 'center'">
               {{ column.label }}

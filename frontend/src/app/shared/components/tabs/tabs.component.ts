@@ -17,7 +17,7 @@ export interface Tab {
       <div class="flex flex-col items-start gap-2 self-stretch">
         <div *ngFor="let tab of tabs" 
              class="flex h-11 py-1.5 px-4 items-center gap-2 self-stretch rounded-lg cursor-pointer"
-             [class.bg-primary-teal-light]="tab.active"
+             [class.bg-teal-50]="tab.active"
              [class.bg-white]="!tab.active"
              [class.hover:bg-gray-50]="!tab.active"
              (click)="onTabClick(tab.id)">

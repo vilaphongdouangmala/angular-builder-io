@@ -5,6 +5,108 @@
 
 @layer base {
   html, body {
-    @apply h-full m-0 p-0 font-bai-jamjuree bg-bg-gray;
+    @apply h-full m-0 p-0;
+    font-family: 'Bai Jamjuree', system-ui, -apple-system, sans-serif;
+    background-color: #F9F9FC;
+  }
+}
+
+@layer utilities {
+  /* Custom width utilities */
+  .w-87\.75 {
+    width: 21.9375rem; /* 351px */
+  }
+  
+  .w-114\.25 {
+    width: 28.5625rem; /* 457px */
+  }
+  
+  .w-66 {
+    width: 16.5rem; /* 264px */
+  }
+  
+  .w-61 {
+    width: 15.25rem; /* 244px */
+  }
+  
+  .w-70 {
+    width: 17.5rem; /* 280px */
+  }
+  
+  .w-21 {
+    width: 5.25rem; /* 84px */
+  }
+  
+  .h-15 {
+    height: 3.75rem; /* 60px */
+  }
+
+  /* Custom color utilities as fallback */
+  .bg-bg-gray {
+    background-color: #F9F9FC;
+  }
+  
+  .text-neutrals-50 {
+    color: #EAEAED;
+  }
+  
+  .text-neutrals-200 {
+    color: #9DA0AB;
+  }
+  
+  .text-neutrals-300 {
+    color: #707485;
+  }
+  
+  .text-neutrals-400 {
+    color: #55596D;
+  }
+  
+  .text-neutrals-900 {
+    color: #12141F;
+  }
+  
+  .text-black-500 {
+    color: #1D1F2C;
+  }
+  
+  .text-gray-500 {
+    color: #667085;
+  }
+  
+  .text-red-500 {
+    color: #FF3B30;
+  }
+  
+  .bg-red-50 {
+    background-color: #FFEBEA;
+  }
+  
+  .bg-primary-teal {
+    background-color: #175252;
+  }
+  
+  .bg-primary-teal-light {
+    background-color: rgba(23, 82, 82, 0.10);
+  }
+  
+  .border-neutrals-50 {
+    border-color: #EAEAED;
+  }
+  
+  .border-neutrals-300 {
+    border-color: #707485;
+  }
+  
+  .shadow-header {
+    box-shadow: 0 1px 18px 0 rgba(181, 201, 235, 0.21), 0 3px 5px 0 rgba(132, 147, 198, 0.12);
+  }
+  
+  .shadow-sidebar {
+    box-shadow: 4px 0 30px 0 rgba(131, 98, 234, 0.05);
+  }
+  
+  .shadow-panel {
+    box-shadow: 0 4px 30px 0 rgba(46, 45, 116, 0.05);
   }
 }

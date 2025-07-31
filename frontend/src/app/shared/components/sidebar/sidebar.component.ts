@@ -26,8 +26,8 @@ interface NavItem {
               <div *ngFor="let item of mainNavItems" 
                    class="flex h-12 px-4 pr-4 pl-1.5 items-center gap-2 self-stretch rounded-lg bg-white cursor-pointer hover:bg-gray-50"
                    [class.bg-red-50]="item.active">
-                <span class="text-neutrals-400 font-normal text-base flex-1" 
-                      [class.text-primary-teal]="item.active"
+                <span class="text-gray-600 font-normal text-base flex-1"
+                      [class.text-teal-700]="item.active"
                       [class.font-semibold]="item.active">{{ item.label }}</span>
                 <div *ngIf="item.badge" class="flex h-4 px-1 items-center rounded-full border"
                      [class.border-gray-300]="item.badgeType === 'default'"

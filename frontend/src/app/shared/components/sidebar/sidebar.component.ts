@@ -16,7 +16,7 @@ interface NavItem {
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="flex w-66 py-4 px-2.5 flex-col justify-end items-start gap-6 self-stretch border-r border-gray-100 bg-white shadow-sidebar overflow-y-auto">
+    <div class="flex w-64 py-4 px-2.5 flex-col justify-end items-start gap-6 self-stretch border-r border-gray-100 bg-white shadow-lg overflow-y-auto">
       <div class="flex flex-col items-start gap-2 self-stretch">
         <!-- Navigation Sections -->
         <div class="flex flex-col items-start gap-5 self-stretch">

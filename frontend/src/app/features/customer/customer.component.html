@@ -103,11 +103,49 @@
 
   <!-- Main Content -->
   <div class="flex-1 p-6">
-    <!-- Data Table -->
-    <app-data-table
-      [columns]="tableColumns"
-      [data]="displayedCustomers">
-    </app-data-table>
+    <!-- Customer Table -->
+    <div class="flex flex-col items-start self-stretch rounded-xl shadow-panel overflow-hidden">
+      <table class="w-full border-collapse">
+        <thead class="bg-white">
+          <tr>
+            <th class="py-3.5 px-4 text-left border-b border-neutrals-50 text-black-500 text-sm font-bold bg-white font-bai-jamjuree">Name</th>
+            <th class="py-3.5 px-4 text-left border-b border-neutrals-50 text-black-500 text-sm font-bold bg-white font-bai-jamjuree w-61">Email</th>
+            <th class="py-3.5 px-4 text-left border-b border-neutrals-50 text-black-500 text-sm font-bold bg-white font-bai-jamjuree w-44">Resident type</th>
+            <th class="py-3.5 px-4 text-center border-b border-neutrals-50 text-black-500 text-sm font-bold bg-white font-bai-jamjuree w-21">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of displayedCustomers; trackBy: trackByCustomerId"
+              class="bg-white hover:bg-gray-50 transition-colors">
+            <td class="py-2 px-4 border-b border-neutrals-50 align-middle">
+              <div class="flex flex-col gap-1">
+                <div class="text-black-500 font-bai-jamjuree text-sm font-medium">{{ customer.name }}</div>
+                <div class="text-neutrals-300 font-bai-jamjuree text-xs">Room number: {{ customer.roomNumber }}</div>
+              </div>
+            </td>
+            <td class="py-2 px-4 border-b border-neutrals-50 align-middle">
+              <div class="flex flex-col gap-1">
+                <div class="text-black-500 font-bai-jamjuree text-sm font-medium overflow-hidden text-ellipsis">{{ customer.email }}</div>
+                <div class="text-neutrals-300 font-bai-jamjuree text-xs">{{ customer.phone }}</div>
+              </div>
+            </td>
+            <td class="py-2 px-4 border-b border-neutrals-50 align-middle">
+              <div class="text-black-500 font-bai-jamjuree text-sm font-medium">{{ customer.residentType }}</div>
+            </td>
+            <td class="py-2 px-4 border-b border-neutrals-50 align-middle text-center">
+              <button (click)="onCustomerAction(customer, 'more')"
+                      class="w-5 h-5 hover:bg-gray-100 rounded p-0.5 transition-colors">
+                <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.0002 10.4167C10.2303 10.4167 10.4168 10.2301 10.4168 10C10.4168 9.76988 10.2303 9.58333 10.0002 9.58333C9.77004 9.58333 9.5835 9.76988 9.5835 10C9.5835 10.2301 9.77004 10.4167 10.0002 10.4167Z" fill="#55596D" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10.0002 15.4167C10.2303 15.4167 10.4168 15.2301 10.4168 15C10.4168 14.7699 10.2303 14.5833 10.0002 14.5833C9.77004 14.5833 9.5835 14.7699 9.5835 15C9.5835 15.2301 9.77004 15.4167 10.0002 15.4167Z" fill="#55596D" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10.0002 5.41666C10.2303 5.41666 10.4168 5.23011 10.4168 4.99999C10.4168 4.76988 10.2303 4.58333 10.0002 4.58333C9.77004 4.58333 9.5835 4.76988 9.5835 4.99999C9.5835 5.23011 9.77004 5.41666 10.0002 5.41666Z" fill="#55596D" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <!-- Pagination -->
     <app-pagination

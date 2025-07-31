@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../../shared/components/header/header.component';
-import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
 import { TabsComponent, Tab } from '../../shared/components/tabs/tabs.component';
 import { DataTableComponent, Column, TableData } from '../../shared/components/data-table/data-table.component';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
@@ -11,8 +9,6 @@ import { PaginationComponent } from '../../shared/components/pagination/paginati
   standalone: true,
   imports: [
     CommonModule,
-    HeaderComponent,
-    SidebarComponent,
     TabsComponent,
     DataTableComponent,
     PaginationComponent
@@ -106,7 +102,7 @@ export class MasterDataComponent {
     {
       id: 10,
       name: 'Lorem Isum',
-      addressTH: '898 อาคารเพลินจิตทาวเวอร์ ชั้นที่ 20',
+      addressTH: '898 อาคารเพลินจิตทาวเวอร์ ��ั้นที่ 20',
       addressEN: '898 Ploenchit Tower, 20th Floor',
       action: ''
     },

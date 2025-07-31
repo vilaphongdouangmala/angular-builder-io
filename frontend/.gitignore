@@ -1,0 +1,75 @@
+# Ignore node_modules
+node_modules
+
+# Ignore dist folder
+dist
+
+# Ignore various log formats
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Ignore cache
+.hcache
+
+# Ignore temp files
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+*.komodoworkspace
+
+# Ignore build and reports
+/coverage
+/coverage-report
+/build
+/docs
+/dist
+/node_modules
+/report
+
+# Ignore tests
+/karma.conf.js
+/karma-coverage.conf.js
+/jest.config.js
+/jest.setup.js
+
+# Ignore editor settings
+.editorconfig
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+*.komodoworkspace
+
+# Ignore IDEs project settings
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignore build output
+/out-tsc
+/out-js
+
+# Ignore other
+/.cache
+/.cache-loader
+/.editorconfig
+/.idea
+/.npm
+/.nvm
+/.yarn-integrity
+/.yarn-metadata.json
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+.env.local

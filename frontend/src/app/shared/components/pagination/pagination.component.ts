@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
       <!-- Pagination Info -->
       <div class="flex items-center gap-2 flex-1">
         <span class="text-gray-500 text-xs font-bold">Showing</span>
-        <select class="h-8 py-1.5 px-4 rounded-lg border border-neutrals-50 bg-white text-neutrals-300 text-xs font-bold"
+        <select class="h-8 py-1.5 px-4 rounded-lg border border-gray-200 bg-white text-gray-600 text-xs font-bold"
                 [value]="itemsPerPage" 
                 (change)="onItemsPerPageChange($event)">
           <option value="10">10</option>

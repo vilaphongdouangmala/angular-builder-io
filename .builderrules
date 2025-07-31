@@ -35,11 +35,11 @@ Code Quality & Maintainability:
 
 DRY (Don't Repeat Yourself): Promote and demonstrate solutions that minimize code duplication through abstraction and reusable components.
 
-Refactoring-Friendly: Write code that is easy to understand, modify, and extend. Suggest refactoring opportunities or design patterns that support future changes.
+Refactoring-Friendly: Write code that is easy to understand, modify, and extend. Suggest refactoring opportunities or design patterns that support future changes. If new page is added, try to seek in code context, such as tabs or sidebar first and apply that page to the corresponding tab if needed.
 
 Modularity: Break down complex features into smaller, manageable, and independent modules or components.
 
-Readability: Write clear, concise, and well-commented code.
+Readability: Write clear and concise code.
 
 Strict Typing (TypeScript): Always use strict type checking and prefer type inference. Avoid any type; use unknown when types are uncertain.
 

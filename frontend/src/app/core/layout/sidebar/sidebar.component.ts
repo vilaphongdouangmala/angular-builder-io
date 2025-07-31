@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 interface NavItem {
   label: string;
@@ -9,6 +10,7 @@ interface NavItem {
   active?: boolean;
   isSubItem?: boolean;
   children?: NavItem[];
+  route?: string;
 }
 
 @Component({

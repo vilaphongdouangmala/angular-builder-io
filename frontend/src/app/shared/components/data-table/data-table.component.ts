@@ -34,8 +34,8 @@ export interface TableData {
         <tbody>
           <tr *ngFor="let row of data; let i = index" 
               class="bg-white hover:bg-gray-50 cursor-pointer">
-            <td *ngFor="let column of columns" 
-                class="py-2 px-4 border-b border-neutrals-50 text-black-500 text-sm font-normal align-middle"
+            <td *ngFor="let column of columns"
+                class="py-2 px-4 border-b border-gray-200 text-gray-900 text-sm font-normal align-middle"
                 [class.text-center]="column.align === 'center'">
               {{ getRowValue(row, column.key) }}
             </td>

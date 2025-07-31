@@ -1,0 +1,25 @@
+// Pagination Component Styles
+.pagination-container {
+  // Additional custom styles can be added here if needed
+  // Currently using TailwindCSS utility classes
+}
+
+// Custom select dropdown styles for better browser consistency
+select {
+  background-image: none; // Remove default browser arrow
+  
+  &::-ms-expand {
+    display: none; // Hide IE select arrow
+  }
+}
+
+// Focus states for better accessibility
+select:focus,
+button:focus {
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.2);
+}
+
+// Hover states for disabled buttons
+button:disabled:hover {
+  background-color: white !important;
+}

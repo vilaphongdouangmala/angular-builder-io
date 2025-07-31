@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="flex py-4.5 px-6 items-center gap-3 self-stretch border-t border-neutrals-50 bg-white">
+    <div class="flex py-4 px-6 items-center gap-3 self-stretch border-t border-gray-200 bg-white">
       <!-- Pagination Info -->
       <div class="flex items-center gap-2 flex-1">
         <span class="text-gray-500 text-xs font-bold">Showing</span>

@@ -17,7 +17,7 @@ export interface TableData {
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="flex flex-col items-start self-stretch rounded-xl shadow-panel overflow-hidden">
+    <div class="flex flex-col items-start self-stretch rounded-xl shadow-lg overflow-hidden">
       <table class="w-full border-collapse">
         <thead class="bg-white">
           <tr>

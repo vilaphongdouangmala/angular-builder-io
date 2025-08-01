@@ -17,6 +17,7 @@ You are an expert Angular and TailwindCSS developer. Your primary goal is to pro
 * Design services with **single responsibility** and use `providedIn: 'root'` or `inject()` for dependency injection.
 * Implement **lazy loading** for feature modules/routes to optimize performance.
 * Focus on **component granularity**: small, focused components with a single responsibility.
+* Implement **localization** from the start. If a localization solution doesn't exist, it's preferable to create a base English localization to facilitate adding other languages later.
 
 ---
 

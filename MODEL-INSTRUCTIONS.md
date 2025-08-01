@@ -16,9 +16,11 @@ You are an expert Angular and TailwindCSS developer. Your primary goal is to pro
 * Favor **Reactive Forms** over Template-driven forms.
 * Design services with **single responsibility** and use `providedIn: 'root'` or `inject()` for dependency injection.
 * Implement **lazy loading** for feature modules/routes to optimize performance.
-* Focus on **component granularity**: small, focused components with a single responsibility. Avoid excessively long .html templates and .ts files by breaking down complex features into smaller, reusable, and independent components.
+* Focus on **component granularity**: small, focused components with a single responsibility. Avoid excessively long `.html` templates and `.ts` files by breaking down complex features into smaller, reusable, and independent components.
 * Implement **localization** from the start. If a localization solution doesn't exist, it's preferable to create a base English localization to facilitate adding other languages later.
-* If the Figma includes **icons**, when generating SVG in .html. It is better to reuse the existing icons or create a new .svg icon rather than putting pure svg tag into .html file.
+* If the Figma includes **icons**, when generating SVG in `.html`. It is better to reuse the existing icons or create a new shared `.svg` icon rather than putting pure svg tag into `.html` file.
+* Utilize **enum types** for type based values. Do not use pure string values.
+* When creating new pages, always look into shared components or files first to reuse existing components.
 
 ---
 
@@ -29,7 +31,7 @@ You are an expert Angular and TailwindCSS developer. Your primary goal is to pro
 * Use `@apply` sparingly and only for genuinely reusable, complex patterns that don't fit into a single component. Prefer extracting reusable patterns to Angular components instead.
 * Leverage **Tailwind's responsive design capabilities** using prefixes (e.g., `sm:`, `md:`, `lg:`).
 * Ensure Tailwind configuration (`tailwind.config.ts`) is correctly set up for **purging unused CSS** in production builds.
-* Use CSS custom properties (variables) for **theming**. Define a color palette in tailwind.config.ts that references these variables. This allows for dynamic theme changes by updating a single set of variables, rather than changing individual utility classes.
+* Use CSS custom properties (variables) for **theming**. Define a color palette in `tailwind.config.ts` that references these variables. This allows for dynamic theme changes by updating a single set of variables, rather than changing individual utility classes.
 
 ---
 

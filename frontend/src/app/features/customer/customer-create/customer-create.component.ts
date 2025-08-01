@@ -178,12 +178,9 @@ export class CustomerCreateComponent {
 
   private updateContactPersonsForCustomerType(customerType: string) {
     const isCompany = customerType === 'company';
-    const currentContacts = this.contactPersons.controls;
 
-    // Clear existing contact persons array
-    while (this.contactPersons.length > 0) {
-      this.contactPersons.removeAt(0);
-    }
+    // Use clear() method instead of removeAt() to avoid triggering updates for each removal
+    this.contactPersons.clear();
 
     // Add at least one contact person with appropriate structure
     this.contactPersons.push(this.createContactPersonGroup(isCompany));

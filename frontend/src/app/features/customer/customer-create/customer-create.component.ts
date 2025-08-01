@@ -25,6 +25,7 @@ export interface CompanyContactPerson {
 })
 export class CustomerCreateComponent {
   customerForm: FormGroup;
+  private isUpdatingValidators = false;
 
   companyTypes = [
     { value: 'limited', label: 'Limited Company' },
@@ -59,8 +60,10 @@ export class CustomerCreateComponent {
 
     // Update validators when customer type changes
     this.customerForm.get('customerType')?.valueChanges.subscribe(type => {
-      this.updateValidators(type);
-      this.updateContactPersonsForCustomerType(type);
+      if (!this.isUpdatingValidators) {
+        this.updateValidators(type);
+        this.updateContactPersonsForCustomerType(type);
+      }
     });
 
     // Initialize validators for default type
@@ -142,13 +145,14 @@ export class CustomerCreateComponent {
   }
 
   private updateValidators(customerType: string) {
+    this.isUpdatingValidators = true;
     const controls = this.customerForm.controls;
 
     // Clear all validators first
     Object.keys(controls).forEach(key => {
       if (key !== 'customerType' && key !== 'contactPersons' && key !== 'email') {
         controls[key].clearValidators();
-        controls[key].setValue(''); // Clear values when switching types
+        controls[key].setValue('', { emitEvent: false }); // Prevent triggering events
       }
     });
 
@@ -168,8 +172,12 @@ export class CustomerCreateComponent {
 
     // Update form control validation status
     Object.keys(controls).forEach(key => {
-      controls[key].updateValueAndValidity();
+      if (key !== 'customerType') { // Don't update customerType to avoid triggering valueChanges
+        controls[key].updateValueAndValidity({ emitEvent: false });
+      }
     });
+
+    this.isUpdatingValidators = false;
   }
 
   hasWithholdingTax(index: number): boolean {

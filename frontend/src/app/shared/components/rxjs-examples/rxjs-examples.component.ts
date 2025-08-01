@@ -178,7 +178,7 @@ interface User {
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="text-center p-4 bg-blue-50 rounded">
             <p class="font-medium">Stock Price</p>
-            <p class="text-xl font-bold text-blue-600">${{ stockPrice() }}</p>
+            <p class="text-xl font-bold text-blue-600">\${{ stockPrice() }}</p>
           </div>
           <div class="text-center p-4 bg-green-50 rounded">
             <p class="font-medium">Users Online</p>

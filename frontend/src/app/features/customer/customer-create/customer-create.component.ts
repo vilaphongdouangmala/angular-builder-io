@@ -123,16 +123,34 @@ export class CustomerCreateComponent implements OnDestroy {
     this.router.navigate(['/customer']);
   }
 
-  onSave() {
+  onSave(): void {
     if (this.customerForm.valid) {
-      console.log('Customer data:', this.customerForm.value);
-      console.log("Call API to backend");
-      const isSuccess = true;
-      if (isSuccess) {
-        console.log("sucessfully created customer")
-      }
-      // Here you would typically save the data to a service
-      this.router.navigate(['/customer']);
+      const formValue = this.customerForm.value;
+
+      // Transform form data to CustomerData format
+      const customerData: Omit<CustomerData, 'id'> = {
+        name: formValue.customerType === 'individual'
+          ? `${formValue.firstName} ${formValue.lastName}`.trim()
+          : formValue.companyName,
+        roomNumber: '12345', // Default value - would typically come from another field
+        email: formValue.email,
+        phone: formValue.phoneNo || '000-000-0000',
+        residentType: 'Owner' // Default value - would typically come from form
+      };
+
+      this.customerDataService.createCustomer(customerData).pipe(
+        tap(() => {
+          console.log('Successfully created customer');
+        }),
+        takeUntil(this.destroy$),
+        catchError(error => {
+          console.error('Error creating customer:', error);
+          // Here you might want to show a toast notification or error message
+          return EMPTY;
+        })
+      ).subscribe(() => {
+        this.router.navigate(['/customer']);
+      });
     } else {
       // Mark all fields as touched to show validation errors
       this.customerForm.markAllAsTouched();

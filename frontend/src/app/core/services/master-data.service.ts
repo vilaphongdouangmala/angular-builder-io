@@ -350,22 +350,22 @@ export class MasterDataService {
     }
   }
 
-  private updateDataSource<T extends MasterDataItem>(
+  private updateDataSource(
     type: MasterDataType,
-    updateFn: (currentData: T[]) => T[]
+    updateFn: (currentData: any[]) => any[]
   ): void {
     switch (type) {
       case 'building':
-        this.buildingsSubject.next(updateFn(this.buildingsSubject.value as any));
+        this.buildingsSubject.next(updateFn(this.buildingsSubject.value));
         break;
       case 'floor':
-        this.floorsSubject.next(updateFn(this.floorsSubject.value as any));
+        this.floorsSubject.next(updateFn(this.floorsSubject.value));
         break;
       case 'room':
-        this.roomsSubject.next(updateFn(this.roomsSubject.value as any));
+        this.roomsSubject.next(updateFn(this.roomsSubject.value));
         break;
       case 'billing':
-        this.billingSubject.next(updateFn(this.billingSubject.value as any));
+        this.billingSubject.next(updateFn(this.billingSubject.value));
         break;
     }
   }

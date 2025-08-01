@@ -39,7 +39,7 @@ import { ThemeService, Theme } from '../../../core/services/theme.service';
 export class ThemeSwitcherComponent {
   themeService = inject(ThemeService);
 
-  setTheme(theme: Theme): void {
-    this.themeService.setTheme(theme);
+  setTheme(theme: string): void {
+    this.themeService.setTheme(theme as Theme);
   }
 }

@@ -186,6 +186,10 @@ export class CustomerComponent {
     }
   }
 
+  onCustomerRowClick(customer: CustomerData) {
+    this.router.navigate(['/customer', customer.id]);
+  }
+
   onActionDialogClose() {
     this.actionDialogVisible.set(false);
     this.selectedCustomer.set(null);

@@ -9,6 +9,13 @@ export interface ContactPerson {
   remarks: string;
 }
 
+export interface CompanyContactPerson {
+  contactName: string;
+  email: string;
+  remarks: string;
+  withholdingTax?: number;
+}
+
 @Component({
   selector: 'app-customer-create',
   standalone: true,
@@ -19,6 +26,13 @@ export interface ContactPerson {
 export class CustomerCreateComponent {
   customerForm: FormGroup;
 
+  companyTypes = [
+    { value: 'limited', label: 'Limited Company' },
+    { value: 'public', label: 'Public Limited Company' },
+    { value: 'partnership', label: 'Partnership' },
+    { value: 'others', label: 'Others' }
+  ];
+
   constructor(
     private fb: FormBuilder,
     private router: Router
@@ -26,23 +40,38 @@ export class CustomerCreateComponent {
     this.customerForm = this.fb.group({
       customerType: ['individual', Validators.required],
       taxId: [''],
-      prefix: ['', Validators.required],
+      // Individual fields
+      prefix: [''],
       customPrefix: [''],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      firstName: [''],
+      lastName: [''],
+      // Company fields
+      companyType: [''],
+      companyTypeOther: [''],
+      companyName: [''],
+      // Common fields
+      email: [''],
       phoneNo: [''],
       contactPersons: this.fb.array([
         this.createContactPersonGroup()
       ])
     });
+
+    // Update validators when customer type changes
+    this.customerForm.get('customerType')?.valueChanges.subscribe(type => {
+      this.updateValidators(type);
+    });
+
+    // Initialize validators for default type
+    this.updateValidators('individual');
   }
 
   createContactPersonGroup(): FormGroup {
     return this.fb.group({
       contactName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      remarks: ['']
+      remarks: [''],
+      withholdingTax: [0]
     });
   }
 
@@ -90,5 +119,46 @@ export class CustomerCreateComponent {
 
   isPrefixOthers(): boolean {
     return this.customerForm.get('prefix')?.value === 'others';
+  }
+
+  isCompanyTypeOthers(): boolean {
+    return this.customerForm.get('companyType')?.value === 'others';
+  }
+
+  isCompanyType(): boolean {
+    return this.customerForm.get('customerType')?.value === 'company';
+  }
+
+  isIndividualType(): boolean {
+    return this.customerForm.get('customerType')?.value === 'individual';
+  }
+
+  private updateValidators(customerType: string) {
+    const controls = this.customerForm.controls;
+
+    // Clear all validators first
+    Object.keys(controls).forEach(key => {
+      if (key !== 'customerType' && key !== 'contactPersons') {
+        controls[key].clearValidators();
+      }
+    });
+
+    // Add validators based on customer type
+    if (customerType === 'individual') {
+      controls['prefix'].setValidators([Validators.required]);
+      controls['firstName'].setValidators([Validators.required]);
+      controls['lastName'].setValidators([Validators.required]);
+      controls['email'].setValidators([Validators.required, Validators.email]);
+    } else if (customerType === 'company') {
+      controls['companyType'].setValidators([Validators.required]);
+      controls['companyName'].setValidators([Validators.required]);
+      controls['email'].setValidators([Validators.required, Validators.email]);
+      controls['phoneNo'].setValidators([Validators.required]);
+    }
+
+    // Update form control validation status
+    Object.keys(controls).forEach(key => {
+      controls[key].updateValueAndValidity();
+    });
   }
 }

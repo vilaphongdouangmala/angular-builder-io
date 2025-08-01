@@ -19,7 +19,7 @@ export interface ActionDialogOption {
       <div class="fixed inset-0 z-40" (click)="onClose()"></div>
       
       <!-- Dialog -->
-      <div class="fixed z-50 bg-white rounded-xl dialog-shadow"
+      <div class="fixed z-50 bg-white rounded-xl shadow-header"
            [ngStyle]="{
              left: position().x + 'px',
              top: position().y + 'px',

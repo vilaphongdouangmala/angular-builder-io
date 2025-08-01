@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocalizationService } from '../../../core/services/localization.service';
+import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
 export interface ContactPerson {
   contactName: string;
@@ -19,7 +21,7 @@ export interface CompanyContactPerson {
 @Component({
   selector: 'app-customer-create',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './customer-create.component.html',
   styleUrl: './customer-create.component.scss'
 })
@@ -27,11 +29,13 @@ export class CustomerCreateComponent {
   customerForm: FormGroup;
   private isUpdatingValidators = false;
 
+  localizationService = inject(LocalizationService);
+
   companyTypes = [
-    { value: 'limited', label: 'Limited Company' },
-    { value: 'public', label: 'Public Limited Company' },
-    { value: 'partnership', label: 'Partnership' },
-    { value: 'others', label: 'Others' }
+    { value: 'limited', label: 'customer.companyTypes.limited' },
+    { value: 'public', label: 'customer.companyTypes.public' },
+    { value: 'partnership', label: 'customer.companyTypes.partnership' },
+    { value: 'others', label: 'customer.companyTypes.others' }
   ];
 
   constructor(

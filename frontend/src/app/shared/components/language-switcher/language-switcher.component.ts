@@ -68,8 +68,14 @@ export class LanguageSwitcherComponent {
     this.isOpen = false;
   }
 
-  async setLanguage(language: SupportedLanguage): Promise<void> {
-    await this.localizationService.setLanguage(language);
-    this.closeDropdown();
+  setLanguage(language: SupportedLanguage): void {
+    this.localizationService.setLanguage(language).pipe(
+      catchError(error => {
+        console.error('Failed to set language:', error);
+        return EMPTY;
+      })
+    ).subscribe(() => {
+      this.closeDropdown();
+    });
   }
 }

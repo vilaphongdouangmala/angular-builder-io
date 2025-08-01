@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
+import { CustomerActionDialogComponent } from '../../shared/components/customer-action-dialog/customer-action-dialog.component';
 
 export interface CustomerData {
   id: number;
@@ -15,12 +16,17 @@ export interface CustomerData {
 @Component({
   selector: 'app-customer',
   standalone: true,
-  imports: [CommonModule, PaginationComponent],
+  imports: [CommonModule, PaginationComponent, CustomerActionDialogComponent],
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.scss'
 })
 export class CustomerComponent {
   searchText = '';
+
+  // Action dialog state
+  actionDialogVisible = signal(false);
+  actionDialogPosition = signal({ x: 0, y: 0 });
+  selectedCustomer = signal<CustomerData | null>(null);
 
   constructor(private router: Router) {}
 
@@ -162,8 +168,48 @@ export class CustomerComponent {
     this.currentPage = 1;
   }
 
-  onCustomerAction(customer: CustomerData, action: string) {
-    console.log(`${action} customer:`, customer);
+  onCustomerAction(customer: CustomerData, action: string, event?: Event) {
+    if (action === 'more' && event) {
+      event.stopPropagation();
+      const target = event.target as HTMLElement;
+      const rect = target.getBoundingClientRect();
+
+      // Position the dialog near the clicked button
+      const x = rect.left - 110 + rect.width; // Align right edge of dialog with button
+      const y = rect.bottom + 4; // Position below the button with small gap
+
+      this.selectedCustomer.set(customer);
+      this.actionDialogPosition.set({ x, y });
+      this.actionDialogVisible.set(true);
+    } else {
+      console.log(`${action} customer:`, customer);
+    }
+  }
+
+  onActionDialogClose() {
+    this.actionDialogVisible.set(false);
+    this.selectedCustomer.set(null);
+  }
+
+  onEditCustomer() {
+    const customer = this.selectedCustomer();
+    if (customer) {
+      console.log('Edit customer:', customer);
+      // Navigate to edit page or open edit dialog
+      this.router.navigate(['/customer/edit', customer.id]);
+    }
+  }
+
+  onDeleteCustomer() {
+    const customer = this.selectedCustomer();
+    if (customer) {
+      console.log('Delete customer:', customer);
+      // Show confirmation dialog and delete customer
+      if (confirm(`Are you sure you want to delete ${customer.name}?`)) {
+        this.customers = this.customers.filter(c => c.id !== customer.id);
+        this.totalItems = this.customers.length;
+      }
+    }
   }
 
   get displayedCustomers(): CustomerData[] {

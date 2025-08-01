@@ -75,8 +75,38 @@
         </div>
       </div>
 
-      <!-- Prefix -->
-      <div class="flex flex-col items-start gap-2 self-stretch">
+      <!-- Company Type - Only for Company -->
+      <div *ngIf="isCompanyType()" class="flex flex-col items-start gap-2 self-stretch">
+        <div class="flex items-end gap-2 self-stretch">
+          <label class="flex-1 text-neutrals-900 font-bai-jamjuree text-base font-medium">
+            Company type<span class="text-red-500">*</span>
+          </label>
+        </div>
+        <div class="flex flex-col items-start gap-2 self-stretch">
+          <div *ngFor="let type of companyTypes" class="flex h-11 items-center gap-2.5">
+            <div class="flex p-0.5 justify-center items-center gap-2">
+              <input
+                type="radio"
+                [id]="type.value"
+                [value]="type.value"
+                formControlName="companyType"
+                class="w-6 h-6 text-blue-600 focus:ring-blue-500">
+            </div>
+            <div class="flex flex-col justify-between items-start self-stretch">
+              <label [for]="type.value" class="text-black-500 font-bai-jamjuree text-sm font-medium cursor-pointer">{{ type.label }}</label>
+            </div>
+            <input
+              *ngIf="type.value === 'others' && isCompanyTypeOthers()"
+              type="text"
+              formControlName="companyTypeOther"
+              placeholder="Please Specify"
+              class="flex flex-1 p-2.5 px-3 justify-center items-center gap-2 rounded-lg border border-neutrals-50 bg-neutrals-50 text-sm text-neutrals-300 font-bai-jamjuree focus:ring-2 focus:ring-blue-500">
+          </div>
+        </div>
+      </div>
+
+      <!-- Prefix - Only for Individual -->
+      <div *ngIf="isIndividualType()" class="flex flex-col items-start gap-2 self-stretch">
         <div class="flex items-end gap-2 self-stretch">
           <label class="flex-1 text-neutrals-900 font-bai-jamjuree text-base font-medium">
             Prefix<span class="text-red-500">*</span>
@@ -85,10 +115,10 @@
         <div class="flex justify-between items-start self-stretch">
           <div class="flex items-center gap-2.5 self-stretch">
             <div class="flex p-0.5 justify-center items-center gap-2">
-              <input 
-                type="radio" 
-                id="mr" 
-                value="mr" 
+              <input
+                type="radio"
+                id="mr"
+                value="mr"
                 formControlName="prefix"
                 class="w-6 h-6 text-blue-600 focus:ring-blue-500">
             </div>
@@ -96,10 +126,10 @@
           </div>
           <div class="flex items-center gap-2.5 self-stretch">
             <div class="flex p-0.5 justify-center items-center gap-2">
-              <input 
-                type="radio" 
-                id="mrs" 
-                value="mrs" 
+              <input
+                type="radio"
+                id="mrs"
+                value="mrs"
                 formControlName="prefix"
                 class="w-6 h-6 text-blue-600 focus:ring-blue-500">
             </div>
@@ -107,10 +137,10 @@
           </div>
           <div class="flex items-center gap-2.5 self-stretch">
             <div class="flex p-0.5 justify-center items-center gap-2">
-              <input 
-                type="radio" 
-                id="ms" 
-                value="ms" 
+              <input
+                type="radio"
+                id="ms"
+                value="ms"
                 formControlName="prefix"
                 class="w-6 h-6 text-blue-600 focus:ring-blue-500">
             </div>
@@ -118,17 +148,17 @@
           </div>
           <div class="flex items-center gap-2">
             <div class="flex p-0.5 justify-center items-center gap-2">
-              <input 
-                type="radio" 
-                id="others" 
-                value="others" 
+              <input
+                type="radio"
+                id="others-prefix"
+                value="others"
                 formControlName="prefix"
                 class="w-6 h-6 text-blue-600 focus:ring-blue-500">
             </div>
-            <label for="others" class="text-black-500 font-bai-jamjuree text-sm font-medium cursor-pointer">Others</label>
-            <input 
+            <label for="others-prefix" class="text-black-500 font-bai-jamjuree text-sm font-medium cursor-pointer">Others</label>
+            <input
               *ngIf="isPrefixOthers()"
-              type="text" 
+              type="text"
               formControlName="customPrefix"
               placeholder="Please Specify"
               class="flex w-130 p-2.5 px-3 justify-center items-center gap-2 rounded-lg border border-neutrals-50 bg-neutrals-50 text-sm text-neutrals-300 font-bai-jamjuree focus:ring-2 focus:ring-blue-500">
@@ -136,16 +166,31 @@
         </div>
       </div>
 
-      <!-- First Name and Last Name Row -->
-      <div class="flex items-start gap-5 self-stretch">
+      <!-- Company Name - Only for Company -->
+      <div *ngIf="isCompanyType()" class="flex h-18 flex-col items-start gap-2 self-stretch">
+        <div class="flex items-start gap-0.5">
+          <label class="text-black-500 font-bai-jamjuree text-base font-medium">Company name</label>
+          <span class="text-red-500 font-bai-jamjuree text-base font-medium">*</span>
+        </div>
+        <div class="flex flex-col justify-center items-start gap-1 self-stretch">
+          <input
+            type="text"
+            formControlName="companyName"
+            placeholder="Company Name"
+            class="flex p-2.5 px-3 justify-center items-center gap-2 self-stretch rounded-lg border border-neutrals-50 bg-white text-sm text-neutrals-300 font-bai-jamjuree focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        </div>
+      </div>
+
+      <!-- First Name and Last Name Row - Only for Individual -->
+      <div *ngIf="isIndividualType()" class="flex items-start gap-5 self-stretch">
         <div class="flex flex-col items-start gap-2 flex-1">
           <div class="flex items-start gap-0.5">
             <label class="text-black-500 font-bai-jamjuree text-base font-medium">First Name</label>
             <span class="text-red-500 font-bai-jamjuree text-base font-medium">*</span>
           </div>
           <div class="flex flex-col justify-center items-start gap-1 self-stretch">
-            <input 
-              type="text" 
+            <input
+              type="text"
               formControlName="firstName"
               placeholder="First Name"
               class="flex p-2.5 px-3 justify-center items-center gap-2 self-stretch rounded-lg border border-neutrals-50 bg-white text-sm text-neutrals-300 font-bai-jamjuree focus:ring-2 focus:ring-blue-500 focus:border-transparent">
@@ -157,8 +202,8 @@
             <span class="text-red-500 font-bai-jamjuree text-base font-medium">*</span>
           </div>
           <div class="flex flex-col justify-center items-start gap-1 self-stretch">
-            <input 
-              type="text" 
+            <input
+              type="text"
               formControlName="lastName"
               placeholder="Last Name"
               class="flex p-2.5 px-3 justify-center items-center gap-2 self-stretch rounded-lg border border-neutrals-50 bg-white text-sm text-neutrals-300 font-bai-jamjuree focus:ring-2 focus:ring-blue-500 focus:border-transparent">
@@ -183,13 +228,14 @@
         </div>
         <div class="flex w-130 h-18 flex-col items-start gap-2">
           <div class="flex items-start gap-0.5">
-            <label class="text-black-500 font-bai-jamjuree text-base font-medium">Phone No.</label>
+            <label class="text-black-500 font-bai-jamjuree text-base font-medium">Phone no.</label>
+            <span *ngIf="isCompanyType()" class="text-red-500 font-bai-jamjuree text-base font-medium">*</span>
           </div>
           <div class="flex flex-col justify-center items-start gap-1 self-stretch">
             <input 
               type="tel" 
               formControlName="phoneNo"
-              placeholder="Phone Number"
+              placeholder="Phone No."
               class="flex p-2.5 px-3 justify-center items-center gap-2 self-stretch rounded-lg border border-neutrals-50 bg-white text-sm text-neutrals-300 font-bai-jamjuree focus:ring-2 focus:ring-blue-500 focus:border-transparent">
           </div>
         </div>
@@ -289,6 +335,28 @@
                     formControlName="remarks"
                     placeholder="Remarks"
                     class="flex p-3 justify-center items-center gap-2 flex-1 self-stretch rounded-lg border border-neutrals-50 bg-white text-sm font-bai-jamjuree text-neutrals-100 focus:ring-2 focus:ring-blue-500">
+                </div>
+              </div>
+            </div>
+
+            <!-- Withholding Tax Column - Only for Company -->
+            <div *ngIf="isCompanyType()" class="flex w-15 flex-col items-start">
+              <div class="flex w-15 h-11 p-0 px-2.5 flex-col justify-center items-center gap-1 bg-gray-100">
+                <div class="text-primary-teal text-center font-bai-jamjuree text-sm font-semibold">Withholding Tax (%)</div>
+              </div>
+              <div *ngFor="let contact of contactPersons.controls; let i = index"
+                   class="flex h-15 p-0 px-2.5 flex-col justify-center items-center gap-1 self-stretch"
+                   [class.bg-bg-gray]="i % 2 === 1"
+                   [class.bg-white]="i % 2 === 0">
+                <div class="flex h-11 flex-col justify-center items-start gap-1 flex-shrink-0 self-stretch" [formGroupName]="i">
+                  <input
+                    type="number"
+                    formControlName="withholdingTax"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    placeholder="0"
+                    class="flex p-3 justify-center items-center gap-2 flex-1 self-stretch rounded-lg border border-neutrals-50 bg-white text-sm font-bai-jamjuree text-neutrals-100 focus:ring-2 focus:ring-blue-500 text-center">
                 </div>
               </div>
             </div>

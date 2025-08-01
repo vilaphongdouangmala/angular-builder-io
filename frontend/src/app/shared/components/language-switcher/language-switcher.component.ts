@@ -24,7 +24,6 @@ import { TranslatePipe } from '../../pipes/translate.pipe';
       <div
         *ngIf="isOpen"
         class="absolute top-full left-0 mt-1 w-48 bg-white border border-neutrals-50 rounded-lg shadow-lg z-50"
-        (clickOutside)="closeDropdown()"
       >
         <button
           *ngFor="let language of localizationService.availableLanguages"

@@ -220,13 +220,13 @@ export class MasterDataComponent implements OnInit, OnDestroy {
   get displayedData(): TableData[] {
     // Convert MasterDataItem to TableData format for the data table
     return this.data().map(item => {
-      const tableData: TableData = { ...item };
-      
+      const tableData: TableData = { ...item } as any;
+
       // Format specific fields based on data type
       if ('dueDate' in item && item.dueDate instanceof Date) {
-        tableData.dueDate = item.dueDate.toLocaleDateString();
+        tableData['dueDate'] = item.dueDate.toLocaleDateString();
       }
-      
+
       return tableData;
     });
   }

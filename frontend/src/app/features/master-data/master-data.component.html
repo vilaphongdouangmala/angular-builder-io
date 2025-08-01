@@ -51,17 +51,17 @@
       </div>
 
       <!-- Data Table -->
-      <app-data-table 
-        [columns]="columns" 
-        [data]="buildingData">
+      <app-data-table
+        [columns]="columns"
+        [data]="displayedData">
       </app-data-table>
 
       <!-- Pagination -->
-      <app-pagination 
-        [currentPage]="currentPage"
-        [totalPages]="totalPages"
-        [totalItems]="totalItems"
-        [itemsPerPage]="itemsPerPage"
+      <app-pagination
+        [currentPage]="currentPage()"
+        [totalPages]="totalPages()"
+        [totalItems]="totalItems()"
+        [itemsPerPage]="itemsPerPage()"
         (pageChange)="onPageChange($event)"
         (itemsPerPageChange)="onItemsPerPageChange($event)">
       </app-pagination>

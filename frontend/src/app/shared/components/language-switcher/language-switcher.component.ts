@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LocalizationService, SupportedLanguage } from '../../../core/services/localization.service';
 import { TranslatePipe } from '../../pipes/translate.pipe';
+import { EMPTY, catchError } from 'rxjs';
 
 @Component({
   selector: 'app-language-switcher',

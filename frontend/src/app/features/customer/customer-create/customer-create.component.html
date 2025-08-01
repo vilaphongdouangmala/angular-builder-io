@@ -203,7 +203,7 @@
         </div>
         
         <!-- Contact Persons Table -->
-        <div class="flex flex-col items-start self-stretch rounded-lg">
+        <div class="flex flex-col items-start self-stretch rounded-lg" formArrayName="contactPersons">
           <div class="flex items-start self-stretch">
             <!-- Table Headers -->
             <div class="flex flex-col items-start">
@@ -212,7 +212,7 @@
                 <div class="text-primary-teal text-center font-bai-jamjuree text-sm font-semibold">No.</div>
               </div>
               <!-- Row Numbers -->
-              <div *ngFor="let contact of contactPersons.controls; let i = index" 
+              <div *ngFor="let contact of contactPersons.controls; let i = index"
                    class="flex h-15 p-0 px-2.5 items-center gap-1 self-stretch"
                    [class.bg-bg-gray]="i % 2 === 1"
                    [class.bg-white]="i % 2 === 0">
@@ -241,9 +241,8 @@
               <div *ngFor="let contact of contactPersons.controls; let i = index"
                    class="flex h-15 p-0 px-2.5 flex-col justify-center items-start gap-1 self-stretch"
                    [class.bg-bg-gray]="i % 2 === 1"
-                   [class.bg-white]="i % 2 === 0"
-                   [formGroupName]="i">
-                <div class="flex h-11 flex-col justify-center items-start gap-1 flex-shrink-0 self-stretch">
+                   [class.bg-white]="i % 2 === 0">
+                <div class="flex h-11 flex-col justify-center items-start gap-1 flex-shrink-0 self-stretch" [formGroupName]="i">
                   <input
                     type="text"
                     formControlName="contactName"
@@ -261,14 +260,13 @@
                   <span class="text-red-500 font-bai-jamjuree text-base font-medium">*</span>
                 </div>
               </div>
-              <div *ngFor="let contact of contactPersons.controls; let i = index" 
+              <div *ngFor="let contact of contactPersons.controls; let i = index"
                    class="flex h-15 p-0 px-2.5 flex-col justify-center items-start gap-1 self-stretch"
                    [class.bg-bg-gray]="i % 2 === 1"
-                   [class.bg-white]="i % 2 === 0"
-                   [formGroupName]="i">
-                <div class="flex h-11 flex-col justify-center items-start gap-1 flex-shrink-0 self-stretch">
-                  <input 
-                    type="email" 
+                   [class.bg-white]="i % 2 === 0">
+                <div class="flex h-11 flex-col justify-center items-start gap-1 flex-shrink-0 self-stretch" [formGroupName]="i">
+                  <input
+                    type="email"
                     formControlName="email"
                     placeholder="Email address"
                     class="flex p-3 justify-center items-center gap-2 flex-1 self-stretch rounded-lg border border-neutrals-50 bg-white text-sm font-bai-jamjuree text-neutrals-100 focus:ring-2 focus:ring-blue-500">
@@ -281,14 +279,13 @@
               <div class="flex h-11 p-0 px-2.5 flex-col justify-center items-center gap-1 self-stretch bg-gray-100">
                 <div class="text-primary-teal text-center font-bai-jamjuree text-sm font-semibold">Remarks</div>
               </div>
-              <div *ngFor="let contact of contactPersons.controls; let i = index" 
+              <div *ngFor="let contact of contactPersons.controls; let i = index"
                    class="flex h-15 p-0 px-2.5 flex-col justify-center items-start gap-1 self-stretch"
                    [class.bg-bg-gray]="i % 2 === 1"
-                   [class.bg-white]="i % 2 === 0"
-                   [formGroupName]="i">
-                <div class="flex h-11 flex-col justify-center items-start gap-1 flex-shrink-0 self-stretch">
-                  <input 
-                    type="text" 
+                   [class.bg-white]="i % 2 === 0">
+                <div class="flex h-11 flex-col justify-center items-start gap-1 flex-shrink-0 self-stretch" [formGroupName]="i">
+                  <input
+                    type="text"
                     formControlName="remarks"
                     placeholder="Remarks"
                     class="flex p-3 justify-center items-center gap-2 flex-1 self-stretch rounded-lg border border-neutrals-50 bg-white text-sm font-bai-jamjuree text-neutrals-100 focus:ring-2 focus:ring-blue-500">
@@ -301,11 +298,11 @@
               <div class="flex w-15 h-11 p-0 px-2.5 flex-col justify-center items-center gap-1 bg-gray-100">
                 <div class="text-primary-teal text-center font-bai-jamjuree text-sm font-semibold">Action</div>
               </div>
-              <div *ngFor="let contact of contactPersons.controls; let i = index" 
+              <div *ngFor="let contact of contactPersons.controls; let i = index"
                    class="flex h-15 p-0 px-2.5 flex-col justify-center items-center gap-1 self-stretch"
                    [class.bg-bg-gray]="i % 2 === 1"
                    [class.bg-white]="i % 2 === 0">
-                <button 
+                <button
                   *ngIf="contactPersons.length > 1"
                   type="button"
                   (click)="removeContactPerson(i)"

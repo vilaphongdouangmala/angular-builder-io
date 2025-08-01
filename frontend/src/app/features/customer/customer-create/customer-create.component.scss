@@ -1,0 +1,84 @@
+// Custom radio button styles
+input[type="radio"] {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #BDBFC7;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  position: relative;
+  
+  &:checked {
+    border-color: #1750C0;
+    background-color: #1750C0;
+    
+    &::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(23, 80, 192, 0.2);
+  }
+}
+
+// Form validation styles
+.ng-invalid.ng-touched {
+  border-color: #FF3B30 !important;
+}
+
+// Disable text selection for table headers
+.bg-gray-100 {
+  user-select: none;
+  background-color: #F0F4F4;
+}
+
+// Additional custom styles
+.text-neutrals-100 {
+  color: #BDBFC7;
+}
+
+// Table header styling
+.bg-gray-100 {
+  background-color: #F0F4F4;
+}
+
+// Company type radio buttons layout
+.company-type-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+}
+
+// Withholding tax input styling
+input[type="number"] {
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+// Responsive table layout
+@media (max-width: 768px) {
+  .contact-persons-table {
+    overflow-x: auto;
+
+    .table-row {
+      min-width: 800px;
+    }
+  }
+}

@@ -133,7 +133,7 @@
               <div class="text-black-500 font-bai-jamjuree text-sm font-medium">{{ customer.residentType }}</div>
             </td>
             <td class="py-2 px-4 border-b border-neutrals-50 align-middle text-center">
-              <button (click)="onCustomerAction(customer, 'more')"
+              <button (click)="onCustomerAction(customer, 'more', $event)"
                       class="w-5 h-5 hover:bg-gray-100 rounded p-0.5 transition-colors">
                 <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M10.0002 10.4167C10.2303 10.4167 10.4168 10.2301 10.4168 10C10.4168 9.76988 10.2303 9.58333 10.0002 9.58333C9.77004 9.58333 9.5835 9.76988 9.5835 10C9.5835 10.2301 9.77004 10.4167 10.0002 10.4167Z" fill="#55596D" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -157,4 +157,13 @@
       (itemsPerPageChange)="onItemsPerPageChange($event)">
     </app-pagination>
   </div>
+
+  <!-- Customer Action Dialog -->
+  <app-customer-action-dialog
+    [isVisible]="actionDialogVisible()"
+    [position]="actionDialogPosition()"
+    (close)="onActionDialogClose()"
+    (edit)="onEditCustomer()"
+    (delete)="onDeleteCustomer()">
+  </app-customer-action-dialog>
 </div>

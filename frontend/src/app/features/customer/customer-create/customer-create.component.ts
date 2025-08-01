@@ -71,6 +71,11 @@ export class CustomerCreateComponent {
   onSave() {
     if (this.customerForm.valid) {
       console.log('Customer data:', this.customerForm.value);
+      console.log("Call API to backend");
+      const isSuccess = true;
+      if (isSuccess) {
+        console.log("sucessfully created customer")
+      }
       // Here you would typically save the data to a service
       this.router.navigate(['/customer']);
     } else {

@@ -356,16 +356,16 @@ export class MasterDataService {
   ): void {
     switch (type) {
       case 'building':
-        this.buildingsSubject.next(updateFn(this.buildingsSubject.value as T[]));
+        this.buildingsSubject.next(updateFn(this.buildingsSubject.value as any));
         break;
       case 'floor':
-        this.floorsSubject.next(updateFn(this.floorsSubject.value as T[]));
+        this.floorsSubject.next(updateFn(this.floorsSubject.value as any));
         break;
       case 'room':
-        this.roomsSubject.next(updateFn(this.roomsSubject.value as T[]));
+        this.roomsSubject.next(updateFn(this.roomsSubject.value as any));
         break;
       case 'billing':
-        this.billingSubject.next(updateFn(this.billingSubject.value as T[]));
+        this.billingSubject.next(updateFn(this.billingSubject.value as any));
         break;
     }
   }

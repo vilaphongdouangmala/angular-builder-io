@@ -60,14 +60,14 @@ export class CustomerCreateComponent {
     // Update validators when customer type changes
     this.customerForm.get('customerType')?.valueChanges.subscribe(type => {
       this.updateValidators(type);
+      this.updateContactPersonsForCustomerType(type);
     });
 
     // Initialize validators for default type
     this.updateValidators('individual');
   }
 
-  createContactPersonGroup(): FormGroup {
-    const isCompany = this.customerForm?.get('customerType')?.value === 'company';
+  createContactPersonGroup(isCompany: boolean = false): FormGroup {
     const group = this.fb.group({
       contactName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -87,7 +87,8 @@ export class CustomerCreateComponent {
   }
 
   addContactPerson() {
-    this.contactPersons.push(this.createContactPersonGroup());
+    const isCompany = this.isCompanyType();
+    this.contactPersons.push(this.createContactPersonGroup(isCompany));
   }
 
   removeContactPerson(index: number) {
@@ -168,5 +169,18 @@ export class CustomerCreateComponent {
     Object.keys(controls).forEach(key => {
       controls[key].updateValueAndValidity();
     });
+  }
+
+  private updateContactPersonsForCustomerType(customerType: string) {
+    const isCompany = customerType === 'company';
+    const currentContacts = this.contactPersons.controls;
+
+    // Clear existing contact persons array
+    while (this.contactPersons.length > 0) {
+      this.contactPersons.removeAt(0);
+    }
+
+    // Add at least one contact person with appropriate structure
+    this.contactPersons.push(this.createContactPersonGroup(isCompany));
   }
 }

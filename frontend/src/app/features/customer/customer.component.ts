@@ -138,7 +138,7 @@ export class CustomerComponent {
   }
 
   onCreate() {
-    console.log('Create new customer');
+    this.router.navigate(['/customer/create']);
   }
 
   onFilter() {

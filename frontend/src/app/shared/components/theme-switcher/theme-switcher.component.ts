@@ -10,7 +10,7 @@ import { ThemeService, Theme } from '../../../core/services/theme.service';
     <div class="flex items-center gap-2">
       <button
         *ngFor="let theme of themeService.availableThemes"
-        (click)="setTheme(theme.name as Theme)"
+        (click)="setTheme(theme.name)"
         [class.active]="themeService.currentTheme === theme.name"
         class="px-3 py-1.5 text-sm rounded-md border transition-colors"
         [class.bg-primary-teal]="themeService.currentTheme === theme.name"

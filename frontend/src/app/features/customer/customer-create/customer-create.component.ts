@@ -1,9 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject, takeUntil, switchMap, tap, catchError, EMPTY } from 'rxjs';
 import { LocalizationService } from '../../../core/services/localization.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
+import { CustomerDataService, CustomerData } from '../../../core/services/customer-data.service';
 
 export interface ContactPerson {
   contactName: string;
@@ -25,9 +27,11 @@ export interface CompanyContactPerson {
   templateUrl: './customer-create.component.html',
   styleUrl: './customer-create.component.scss'
 })
-export class CustomerCreateComponent {
+export class CustomerCreateComponent implements OnDestroy {
   customerForm: FormGroup;
   private isUpdatingValidators = false;
+  private destroy$ = new Subject<void>();
+  private customerDataService = inject(CustomerDataService);
 
   localizationService = inject(LocalizationService);
 
@@ -63,7 +67,9 @@ export class CustomerCreateComponent {
     });
 
     // Update validators when customer type changes
-    this.customerForm.get('customerType')?.valueChanges.subscribe(type => {
+    this.customerForm.get('customerType')?.valueChanges.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(type => {
       if (!this.isUpdatingValidators) {
         this.updateValidators(type);
         this.updateContactPersonsForCustomerType(type);
@@ -87,6 +93,11 @@ export class CustomerCreateComponent {
     }
 
     return this.fb.group(baseControls);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   get contactPersons(): FormArray {

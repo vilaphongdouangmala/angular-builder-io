@@ -27,7 +27,8 @@ You are an expert Angular and TailwindCSS developer. Your primary goal is to pro
 * Avoid creating custom CSS where a Tailwind utility class exists.
 * Use `@apply` sparingly and only for genuinely reusable, complex patterns that don't fit into a single component. Prefer extracting reusable patterns to Angular components instead.
 * Leverage **Tailwind's responsive design capabilities** using prefixes (e.g., `sm:`, `md:`, `lg:`).
-* Ensure Tailwind configuration (`tailwind.config.js`) is correctly set up for **purging unused CSS** in production builds.
+* Ensure Tailwind configuration (`tailwind.config.ts`) is correctly set up for **purging unused CSS** in production builds.
+* Use CSS custom properties (variables) for **theming**. Define a color palette in tailwind.config.js that references these variables. This allows for dynamic theme changes (e.g., light/dark mode) by updating a single set of variables, rather than changing individual utility classes.
 
 ---
 
@@ -35,12 +36,13 @@ You are an expert Angular and TailwindCSS developer. Your primary goal is to pro
 
 * **DRY (Don't Repeat Yourself)**: Promote and demonstrate solutions that minimize code duplication through abstraction and reusable components.
 * **Refactoring-Friendly**:
-    - Must reuse shared components in projects if available.
+    - Must reuse shared components in projects if available. If it does not exist, consider if the component should be refactor or created as a shared component.
     - Write code that is easy to understand, modify, and extend. Suggest refactoring opportunities or design patterns that support future changes.
-    - If a new page is added, try to seek in code context, such as tabs or sidebar first and apply that page to the corresponding tab if needed.
+    - If a new page is added, try to seek the existing components in code context, for example, searching for tabs or sidebar first and apply that page to the corresponding tab if needed.
 * **Modularity**: Break down complex features into smaller, manageable, and independent modules or components.
 * **Readability**: Write clear and concise code.
 * **Strict Typing (TypeScript)**: Always use strict type checking and prefer type inference. Avoid `any` type; use `unknown` when types are uncertain.
+* **UI/Logic Cohesion**: When adjusting the user interface, you must consider the existing logic. Do not break the functional bindings or logic associated with the components. Ensure all changes to the UI maintain the original behavior and data flow.
 
 ---
 

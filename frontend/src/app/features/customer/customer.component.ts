@@ -21,7 +21,9 @@ export interface CustomerData {
 })
 export class CustomerComponent {
   searchText = '';
-  
+
+  constructor(private router: Router) {}
+
   customers: CustomerData[] = [
     {
       id: 1,

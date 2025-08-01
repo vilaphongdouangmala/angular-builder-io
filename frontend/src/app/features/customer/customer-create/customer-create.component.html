@@ -99,7 +99,7 @@
               *ngIf="type.value === 'others' && isCompanyTypeOthers()"
               type="text"
               formControlName="companyTypeOther"
-              placeholder="Please Specify"
+              [placeholder]="'customer.placeholders.pleaseSpecify' | translate"
               class="flex flex-1 p-2.5 px-3 justify-center items-center gap-2 rounded-lg border border-neutrals-50 bg-neutrals-50 text-sm text-neutrals-300 font-bai-jamjuree focus:ring-2 focus:ring-blue-500">
           </div>
         </div>

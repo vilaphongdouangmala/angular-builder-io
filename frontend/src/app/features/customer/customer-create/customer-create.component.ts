@@ -67,12 +67,19 @@ export class CustomerCreateComponent {
   }
 
   createContactPersonGroup(): FormGroup {
-    return this.fb.group({
+    const isCompany = this.customerForm?.get('customerType')?.value === 'company';
+    const group = this.fb.group({
       contactName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      remarks: [''],
-      withholdingTax: [0]
+      remarks: ['']
     });
+
+    // Add withholding tax field only for company customers
+    if (isCompany) {
+      group.addControl('withholdingTax', this.fb.control(0));
+    }
+
+    return group;
   }
 
   get contactPersons(): FormArray {
@@ -140,6 +147,7 @@ export class CustomerCreateComponent {
     Object.keys(controls).forEach(key => {
       if (key !== 'customerType' && key !== 'contactPersons') {
         controls[key].clearValidators();
+        controls[key].setValue(''); // Clear values when switching types
       }
     });
 

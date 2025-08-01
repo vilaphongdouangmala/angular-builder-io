@@ -350,7 +350,7 @@
                    [class.bg-white]="i % 2 === 0">
                 <div class="flex h-11 flex-col justify-center items-start gap-1 flex-shrink-0 self-stretch" [formGroupName]="i">
                   <input
-                    *ngIf="contactPersons.at(i).get('withholdingTax')"
+                    *ngIf="hasWithholdingTax(i)"
                     type="number"
                     formControlName="withholdingTax"
                     min="0"

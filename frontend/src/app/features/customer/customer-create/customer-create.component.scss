@@ -40,9 +40,45 @@ input[type="radio"] {
 // Disable text selection for table headers
 .bg-gray-100 {
   user-select: none;
+  background-color: #F0F4F4;
 }
 
 // Additional custom styles
 .text-neutrals-100 {
   color: #BDBFC7;
+}
+
+// Table header styling
+.bg-gray-100 {
+  background-color: #F0F4F4;
+}
+
+// Company type radio buttons layout
+.company-type-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+}
+
+// Withholding tax input styling
+input[type="number"] {
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+// Responsive table layout
+@media (max-width: 768px) {
+  .contact-persons-table {
+    overflow-x: auto;
+
+    .table-row {
+      min-width: 800px;
+    }
+  }
 }

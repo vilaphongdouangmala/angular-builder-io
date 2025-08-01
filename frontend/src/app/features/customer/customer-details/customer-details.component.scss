@@ -1,0 +1,48 @@
+// Customer Details Component Styles
+.customer-details {
+  // Custom styles for this component can be added here if needed
+  // Currently using Tailwind classes in the template
+}
+
+// Responsive behavior for mobile devices
+@media (max-width: 768px) {
+  .customer-details {
+    .profile-row {
+      @apply flex-col gap-4;
+    }
+    
+    .profile-item {
+      @apply w-full;
+    }
+    
+    .table-container {
+      @apply overflow-x-auto;
+    }
+    
+    table {
+      @apply min-w-full;
+    }
+  }
+}
+
+// Ensure proper spacing for profile information
+.profile-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+// Custom table styling to match Figma design
+.custom-table {
+  th {
+    @apply bg-white border-b border-neutrals-50;
+  }
+  
+  td {
+    @apply bg-white border-b border-neutrals-50;
+  }
+  
+  tr:last-child td {
+    @apply border-b-0;
+  }
+}

@@ -1,0 +1,497 @@
+<!-- Customer Details Page -->
+<div class="flex flex-col bg-bg-gray min-h-screen gap-4">
+  
+  <!-- Header -->
+  <div class="flex items-center gap-6 p-4 bg-white">
+    <div class="flex items-center gap-4 flex-1">
+      <div class="flex items-start gap-4 flex-1">
+        <!-- Back Button -->
+        <button (click)="onBack()" class="flex items-center justify-center w-6 h-6">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 6L9 12L15 18" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <!-- Customer Info -->
+        <div class="flex items-center gap-2 flex-1" *ngIf="customer()">
+          <div class="flex flex-col justify-center items-start gap-2">
+            <div class="flex items-center gap-2">
+              <!-- Avatar -->
+              <div class="flex flex-col items-end">
+                <img class="w-8 h-8 rounded-full" [src]="customer()?.avatar" alt="Customer Avatar" />
+              </div>
+              <!-- Name -->
+              <div class="text-neutrals-900 font-bai-jamjuree text-21 font-bold">{{ customer()?.name }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex flex-col px-6 gap-6">
+    
+    <!-- Profile Section -->
+    <div class="flex flex-col p-8 gap-8 bg-white rounded-xl border border-neutrals-50 shadow-panel">
+      <div class="flex justify-between items-start">
+        <div class="flex flex-col justify-center items-start gap-2">
+          <div class="text-neutrals-900 font-bai-jamjuree text-21 font-bold">Profile</div>
+        </div>
+        <div class="flex items-start gap-2">
+          <!-- Edit Button -->
+          <button (click)="onEdit()" class="flex h-11 items-start">
+            <div class="flex p-2.5 px-4 items-center gap-2 rounded-lg bg-primary-teal">
+              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.9696 4.70964L12.9672 3.71202C13.7483 2.93097 15.0146 2.93097 15.7957 3.71202L16.5028 4.41912C17.2838 5.20017 17.2838 6.4665 16.5028 7.24755L15.5052 8.24517M11.9696 4.70964L4.04225 12.637C3.71017 12.9691 3.50555 13.4074 3.46422 13.8752L3.29065 15.84C3.23588 16.46 3.75476 16.9789 4.37477 16.9241L6.33956 16.7506C6.80736 16.7092 7.24571 16.5046 7.57778 16.1725L15.5052 8.24517M11.9696 4.70964L15.5052 8.24517" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <div class="text-white text-center font-bai-jamjuree text-base font-semibold">Edit</div>
+            </div>
+          </button>
+          <!-- More Options -->
+          <button (click)="onMoreActions()" class="flex h-11 p-2.25 items-center gap-1.75 rounded-lg bg-gray-100">
+            <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.99935 8.33333C8.18344 8.33333 8.33268 8.18409 8.33268 8C8.33268 7.8159 8.18344 7.66666 7.99935 7.66666C7.81525 7.66666 7.66602 7.8159 7.66602 8C7.66602 8.18409 7.81525 8.33333 7.99935 8.33333Z" fill="#175252" stroke="#175252" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7.99935 12.3333C8.18344 12.3333 8.33268 12.1841 8.33268 12C8.33268 11.8159 8.18344 11.6667 7.99935 11.6667C7.81525 11.6667 7.66602 11.8159 7.66602 12C7.66602 12.1841 7.81525 12.3333 7.99935 12.3333Z" fill="#175252" stroke="#175252" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7.99935 4.33333C8.18344 4.33333 8.33268 4.18409 8.33268 4C8.33268 3.8159 8.18344 3.66666 7.99935 3.66666C7.81525 3.66666 7.66602 3.8159 7.66602 4C7.66602 4.18409 7.81525 4.33333 7.99935 4.33333Z" fill="#175252" stroke="#175252" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Profile Information -->
+      <div class="flex flex-col gap-2" *ngIf="customer()">
+        <div class="flex flex-col justify-center items-start gap-2">
+          <div class="flex p-4 flex-col justify-center items-start gap-3.5 bg-bg-gray rounded-lg w-full">
+            <!-- Row 1 -->
+            <div class="flex justify-center items-center gap-3.5 w-full">
+              <div class="flex items-center gap-8 flex-1">
+                <div class="flex w-37 items-center gap-2">
+                  <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.6665 12.5V11.8333C4.6665 9.99238 6.15889 8.5 7.99984 8.5V8.5C9.84079 8.5 11.3332 9.99238 11.3332 11.8333V12.5" stroke="#55596D" stroke-linecap="round"/>
+                    <path d="M8 8.5C9.10457 8.5 10 7.60457 10 6.5C10 5.39543 9.10457 4.5 8 4.5C6.89543 4.5 6 5.39543 6 6.5C6 7.60457 6.89543 8.5 8 8.5Z" stroke="#55596D" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14 3.1V13.9C14 14.2314 13.7314 14.5 13.4 14.5H2.6C2.26863 14.5 2 14.2314 2 13.9V3.1C2 2.76863 2.26863 2.5 2.6 2.5H13.4C13.7314 2.5 14 2.76863 14 3.1Z" stroke="#55596D" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="w-31 flex-shrink-0 text-neutrals-300 font-bai-jamjuree text-sm font-normal">Customer type</div>
+                </div>
+                <div class="text-neutrals-900 font-bai-jamjuree text-sm font-medium">{{ customer()?.customerType }}</div>
+              </div>
+              <div class="flex items-center gap-8 flex-1">
+                <div class="flex w-37 items-center gap-2">
+                  <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.6668 6.49999V5.83333C14.6668 4.72876 13.7714 3.83333 12.6668 3.83333H3.33349C2.22892 3.83333 1.3335 4.72876 1.3335 5.83333V11.1667C1.3335 12.2712 2.22893 13.1667 3.3335 13.1667H8.00016M14.6668 6.49999H4.00016M14.6668 6.49999V7.83333" stroke="#55596D" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12.8256 9.95836L14.2144 10.311C14.4804 10.3786 14.6687 10.6201 14.6562 10.8943C14.4874 14.5933 12.3333 15.1667 12.3333 15.1667C12.3333 15.1667 10.1793 14.5933 10.0105 10.8943C9.99795 10.6201 10.1863 10.3786 10.4523 10.311L11.841 9.95836C12.1641 9.87631 12.5026 9.87631 12.8256 9.95836Z" stroke="#55596D" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="w-31 flex-shrink-0 text-neutrals-300 font-bai-jamjuree text-sm font-normal">Tax ID</div>
+                </div>
+                <div class="text-neutrals-900 font-bai-jamjuree text-sm font-medium">{{ customer()?.taxId }}</div>
+              </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="flex items-start gap-3.5 w-full">
+              <div class="flex items-center gap-8 flex-1">
+                <div class="flex w-37 items-center gap-2">
+                  <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 11.9V5.1C2 4.76863 2.26863 4.5 2.6 4.5H11.0122C11.2128 4.5 11.4002 4.60026 11.5115 4.76718L13.7781 8.16718C13.9125 8.36872 13.9125 8.63128 13.7781 8.83282L11.5115 12.2328C11.4002 12.3997 11.2128 12.5 11.0122 12.5H2.6C2.26863 12.5 2 12.2314 2 11.9Z" stroke="#55596D"/>
+                  </svg>
+                  <div class="w-31 flex-shrink-0 text-neutrals-300 font-bai-jamjuree text-sm font-normal">Prefix</div>
+                </div>
+                <div class="text-neutrals-900 font-bai-jamjuree text-sm font-medium">{{ customer()?.prefix }}</div>
+              </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="flex justify-center items-center gap-3.5 w-full">
+              <div class="flex items-center gap-8 flex-1">
+                <div class="flex w-37 items-center gap-2">
+                  <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.3335 13.8333V13.1667C3.3335 10.5893 5.42283 8.5 8.00016 8.5V8.5C10.5775 8.5 12.6668 10.5893 12.6668 13.1667V13.8333" stroke="#55596D" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.00016 8.5C9.47292 8.5 10.6668 7.3061 10.6668 5.83334C10.6668 4.36058 9.47292 3.16667 8.00016 3.16667C6.5274 3.16667 5.3335 4.36058 5.3335 5.83334C5.3335 7.3061 6.5274 8.5 8.00016 8.5Z" stroke="#55596D" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="w-31 flex-shrink-0 text-neutrals-300 font-bai-jamjuree text-sm font-normal">First name</div>
+                </div>
+                <div class="text-neutrals-900 font-bai-jamjuree text-sm font-medium">{{ customer()?.firstName }}</div>
+              </div>
+              <div class="flex items-center gap-8 flex-1">
+                <div class="flex w-37 items-center gap-2">
+                  <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.3335 13.8333V13.1667C3.3335 10.5893 5.42283 8.5 8.00016 8.5V8.5C10.5775 8.5 12.6668 10.5893 12.6668 13.1667V13.8333" stroke="#55596D" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.00016 8.5C9.47292 8.5 10.6668 7.3061 10.6668 5.83334C10.6668 4.36058 9.47292 3.16667 8.00016 3.16667C6.5274 3.16667 5.3335 4.36058 5.3335 5.83334C5.3335 7.3061 6.5274 8.5 8.00016 8.5Z" stroke="#55596D" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="w-31 flex-shrink-0 text-neutrals-300 font-bai-jamjuree text-sm font-normal">Last name</div>
+                </div>
+                <div class="text-neutrals-900 font-bai-jamjuree text-sm font-medium">{{ customer()?.lastName }}</div>
+              </div>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="flex justify-center items-center gap-3.5 w-full">
+              <div class="flex items-center gap-8 flex-1">
+                <div class="flex w-37 items-center gap-2">
+                  <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.6665 8.50001L7.99984 10.8333L11.3332 8.50001" stroke="#55596D" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M1.3335 13.1667V6.96571C1.3335 6.26318 1.70209 5.61217 2.30451 5.25072L6.97117 2.45072C7.60454 2.0707 8.39579 2.0707 9.02916 2.45072L13.6958 5.25072C14.2982 5.61217 14.6668 6.26318 14.6668 6.96571V13.1667C14.6668 14.2712 13.7714 15.1667 12.6668 15.1667H3.3335C2.22893 15.1667 1.3335 14.2712 1.3335 13.1667Z" stroke="#55596D"/>
+                  </svg>
+                  <div class="w-31 flex-shrink-0 text-neutrals-300 font-bai-jamjuree text-sm font-normal">Email</div>
+                </div>
+                <div class="text-neutrals-900 font-bai-jamjuree text-sm font-medium">{{ customer()?.email }}</div>
+              </div>
+              <div class="flex items-center gap-8 flex-1">
+                <div class="flex w-37 items-center gap-2">
+                  <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.0787 10.3013L9.33323 10.8333C7.47876 9.90253 6.33323 8.83333 5.66657 7.16666L6.17987 4.41326L5.20958 1.83333L3.39547 1.83333C2.26792 1.83333 1.38076 2.76575 1.59349 3.87305C1.96244 5.79352 2.85424 8.68767 4.9999 10.8333C7.25591 13.0893 10.3953 14.2097 12.4769 14.7378C13.6323 15.0309 14.6666 14.1241 14.6666 12.9321L14.6666 11.2875L12.0787 10.3013Z" stroke="#55596D" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="w-31 flex-shrink-0 text-neutrals-300 font-bai-jamjuree text-sm font-normal">Phone no.</div>
+                </div>
+                <div class="text-neutrals-900 font-bai-jamjuree text-sm font-medium">{{ customer()?.phone }}</div>
+              </div>
+            </div>
+
+            <!-- Contact Persons Section -->
+            <div class="flex flex-col items-start gap-2 w-full">
+              <div class="flex w-37 items-center gap-2">
+                <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.6665 6.50001L7.99984 8.83334L11.3332 6.50001" stroke="#55596D" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M1.3335 11.1667V5.83334C1.3335 4.72877 2.22892 3.83334 3.33349 3.83334H12.6668C13.7714 3.83334 14.6668 4.72877 14.6668 5.83334V11.1667C14.6668 12.2712 13.7714 13.1667 12.6668 13.1667H3.3335C2.22893 13.1667 1.3335 12.2712 1.3335 11.1667Z" stroke="#55596D"/>
+                </svg>
+                <div class="w-31 flex-shrink-0 text-neutrals-300 font-bai-jamjuree text-sm font-normal">Contact persons</div>
+              </div>
+
+              <!-- Contact Persons Table -->
+              <div class="flex items-start w-full rounded-xl overflow-hidden">
+                <table class="w-full border-collapse">
+                  <thead>
+                    <tr>
+                      <th class="py-3 px-4 text-left border-b border-neutrals-50 bg-white text-black-500 text-sm font-bold font-bai-jamjuree w-127">Contract name</th>
+                      <th class="py-3 px-4 text-left border-b border-neutrals-50 bg-white text-black-500 text-sm font-bold font-bai-jamjuree flex-1">Email</th>
+                      <th class="py-3 px-4 text-left border-b border-neutrals-50 bg-white text-black-500 text-sm font-bold font-bai-jamjuree flex-1">Remarks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let contact of contactPersons()" class="bg-white">
+                      <td class="py-3 px-4 border-b border-neutrals-50">
+                        <div class="flex items-center gap-2 flex-1">
+                          <div class="flex flex-col items-start gap-1 flex-1">
+                            <div class="text-neutrals-900 text-ellipsis font-bai-jamjuree text-sm font-medium w-full overflow-hidden">{{ contact.contractName }}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="py-3 px-4 border-b border-neutrals-50">
+                        <div class="flex items-center gap-2 flex-1">
+                          <div class="flex flex-col items-start gap-1 flex-1">
+                            <div class="text-black-500 text-ellipsis font-bai-jamjuree text-sm font-medium w-full overflow-hidden">{{ contact.email }}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="py-3 px-4 border-b border-neutrals-50">
+                        <div class="flex items-center gap-2">
+                          <div class="flex w-55 flex-col items-start gap-1">
+                            <div class="text-black-500 font-bai-jamjuree text-sm font-medium">{{ contact.remarks }}</div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Room History Section -->
+    <div class="flex flex-col p-8 gap-8 bg-white rounded-xl border border-neutrals-50 shadow-panel">
+      <div class="flex justify-between items-center">
+        <div class="flex flex-col justify-center items-start gap-2">
+          <div class="text-neutrals-900 font-bai-jamjuree text-21 font-bold">Room history</div>
+        </div>
+        <div class="flex items-start gap-6">
+          <!-- Search Input -->
+          <div class="flex w-87.75 flex-col justify-center items-start gap-1">
+            <div class="flex p-2.5 px-3 items-center gap-2 rounded-lg border border-neutrals-50 bg-white w-full">
+              <div class="flex-1 text-neutrals-300 font-bai-jamjuree text-base font-normal">Building name</div>
+            </div>
+          </div>
+          <!-- Filter Button -->
+          <div class="flex w-11 h-11 flex-col justify-center items-center">
+            <div class="flex p-2.5 flex-col justify-center items-center gap-2 flex-1 rounded-lg border border-neutrals-50 bg-white w-full">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Room History Tabs -->
+      <div class="flex items-start gap-6 rounded-xl">
+        <div class="flex p-1 items-start flex-1 rounded-xl border border-neutrals-50 bg-white">
+          <div class="flex h-11 items-start gap-4 flex-1">
+            <div class="flex items-start gap-4 flex-1">
+              <button (click)="onRoomHistoryTabChange('Owner')" 
+                      class="flex justify-center items-start flex-1 h-full">
+                <div class="flex p-1.5 px-4 justify-center items-center gap-2 flex-1 rounded-lg h-full"
+                     [class]="roomHistoryActiveTab() === 'Owner' ? 'bg-primary-teal-light' : 'bg-white'">
+                  <div class="w-17 text-center font-bai-jamjuree text-sm font-semibold"
+                       [class]="roomHistoryActiveTab() === 'Owner' ? 'text-primary-teal' : 'text-neutrals-300'">Owner</div>
+                  <div class="flex h-4 px-1 flex-col justify-center items-center gap-2.5 rounded-3xl bg-white">
+                    <div class="text-primary-teal text-center font-bai-jamjuree text-xs font-semibold">{{ roomHistoryOwnerCount() }}</div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div class="flex h-11 items-start gap-4 flex-1">
+            <div class="flex items-start gap-4 flex-1">
+              <button (click)="onRoomHistoryTabChange('Tenant')" 
+                      class="flex justify-center items-start flex-1 h-full">
+                <div class="flex p-1.5 px-4 justify-center items-center gap-2 flex-1 rounded-lg h-full"
+                     [class]="roomHistoryActiveTab() === 'Tenant' ? 'bg-primary-teal-light' : 'bg-white'">
+                  <div class="text-center font-bai-jamjuree text-sm font-normal"
+                       [class]="roomHistoryActiveTab() === 'Tenant' ? 'text-primary-teal' : 'text-neutrals-300'">Tenant</div>
+                  <div class="flex h-4 px-1 flex-col justify-center items-center gap-2.5 rounded-3xl"
+                       [class]="roomHistoryActiveTab() === 'Tenant' ? 'bg-white' : 'border border-primary-teal-light bg-primary-teal-light'">
+                    <div class="text-primary-teal text-center font-bai-jamjuree text-xs font-semibold">{{ roomHistoryTenantCount() }}</div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Room History Table -->
+      <div class="flex flex-col items-start rounded-xl shadow-panel overflow-hidden">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr>
+              <th class="h-13 py-3.5 px-4 text-left border-b border-neutrals-50 bg-white text-black-500 text-sm font-bold font-bai-jamjuree w-12.5">No.</th>
+              <th class="h-13 py-3.5 px-4 text-left border-b border-neutrals-50 bg-white text-black-500 text-sm font-bold font-bai-jamjuree w-29.5">Room</th>
+              <th class="h-13 py-3.5 px-4 text-left border-b border-neutrals-50 bg-white text-black-500 text-sm font-bold font-bai-jamjuree w-29.75">Floor</th>
+              <th class="h-13 py-3.5 px-4 text-left border-b border-neutrals-50 bg-white text-black-500 text-sm font-bold font-bai-jamjuree flex-1">Building</th>
+              <th class="h-13 py-3.5 px-4 text-left border-b border-neutrals-50 bg-white text-black-500 text-sm font-bold font-bai-jamjuree w-49.75">Period</th>
+              <th class="h-13 py-3.5 px-4 text-left border-b border-neutrals-50 bg-white text-black-500 text-sm font-bold font-bai-jamjuree w-29.75">
+                <div class="flex justify-between items-center">
+                  <span>Status</span>
+                  <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.3327 5.33333L7.99935 2L4.66602 5.33333" stroke="#55596D" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M11.3327 10.6667L7.99935 14L4.66602 10.6667" stroke="#55596D" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of roomHistoryDisplayedItems(); let i = index" class="bg-white">
+              <td class="h-13 py-2 px-4 border-b border-neutrals-50">
+                <div class="flex items-center gap-2 flex-1">
+                  <div class="flex flex-col items-start gap-1 flex-1">
+                    <div class="text-black-500 text-ellipsis font-bai-jamjuree text-sm font-medium w-full overflow-hidden">{{ i + 1 }}</div>
+                  </div>
+                </div>
+              </td>
+              <td class="h-13 py-2 px-4 border-b border-neutrals-50">
+                <div class="flex items-center gap-2 flex-1">
+                  <div class="flex flex-col items-start gap-1 flex-1">
+                    <div class="text-black-500 text-ellipsis font-bai-jamjuree text-sm font-medium w-full overflow-hidden">{{ item.room }}</div>
+                  </div>
+                </div>
+              </td>
+              <td class="h-13 py-2 px-4 border-b border-neutrals-50">
+                <div class="flex items-center gap-2 flex-1">
+                  <div class="flex flex-col items-start gap-1 flex-1">
+                    <div class="text-black-500 text-ellipsis font-bai-jamjuree text-sm font-medium w-full overflow-hidden">{{ item.floor }}</div>
+                  </div>
+                </div>
+              </td>
+              <td class="h-13 py-2 px-4 border-b border-neutrals-50">
+                <div class="flex items-center gap-2 flex-1">
+                  <div class="flex flex-col items-start gap-1 flex-1">
+                    <div class="text-black-500 text-ellipsis font-bai-jamjuree text-sm font-medium w-full overflow-hidden">{{ item.building }}</div>
+                  </div>
+                </div>
+              </td>
+              <td class="h-13 py-2 px-4 border-b border-neutrals-50">
+                <div class="flex items-center gap-2">
+                  <div class="flex w-55 flex-col items-start gap-1">
+                    <div class="text-black-500 font-bai-jamjuree text-sm font-medium">{{ item.period }}</div>
+                  </div>
+                </div>
+              </td>
+              <td class="h-13 py-2 px-4 border-b border-neutrals-50">
+                <div class="flex w-13.5 items-center gap-2">
+                  <div class="w-2 h-2 flex-shrink-0 rounded-full"
+                       [class]="item.status === 'Active' ? 'bg-green-600' : 'bg-gray-300'"></div>
+                  <div class="text-black-500 text-ellipsis font-bai-jamjuree text-sm font-medium overflow-hidden">{{ item.status }}</div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Room History Pagination -->
+        <div class="flex py-4.5 px-6 items-center gap-3 w-full border-t border-neutrals-50 bg-white">
+          <div class="flex items-center gap-2 flex-1">
+            <div class="flex items-center gap-2.5">
+              <div class="flex items-center gap-2">
+                <div class="flex items-center gap-4">
+                  <div class="text-gray-500 text-center font-bai-jamjuree text-xs font-semibold">Showing</div>
+                  <div class="flex items-start">
+                    <div class="flex h-8 py-1.5 px-4 items-center gap-2 rounded-lg border border-neutrals-50 bg-white">
+                      <div class="text-neutrals-300 text-center font-bai-jamjuree text-xs font-semibold">{{ roomHistoryItemsPerPage() }}</div>
+                      <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6L8 10L12 6" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="text-gray-500 text-center font-bai-jamjuree text-xs font-semibold">from {{ roomHistory().length }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <app-pagination
+            [currentPage]="roomHistoryCurrentPage()"
+            [totalPages]="roomHistoryTotalPages"
+            [totalItems]="roomHistory().length"
+            [itemsPerPage]="roomHistoryItemsPerPage()"
+            (pageChange)="onRoomHistoryPageChange($event)"
+            (itemsPerPageChange)="onRoomHistoryItemsPerPageChange($event)">
+          </app-pagination>
+        </div>
+      </div>
+    </div>
+
+    <!-- Invoice Log Section -->
+    <div class="flex flex-col p-8 gap-8 bg-white rounded-xl border border-neutrals-50 shadow-panel">
+      <div class="flex justify-between items-center">
+        <div class="flex flex-col justify-center items-start gap-2">
+          <div class="text-neutrals-900 font-bai-jamjuree text-21 font-bold">Invoice log</div>
+        </div>
+        <div class="flex w-27.75 h-11 items-start">
+        </div>
+      </div>
+
+      <!-- Invoice Log Tabs -->
+      <div class="flex items-start gap-6 rounded-xl">
+        <div class="flex p-1 items-start flex-1 rounded-xl border border-neutrals-50 bg-white">
+          <div class="flex h-11 items-start gap-4 flex-1">
+            <div class="flex items-start gap-4 flex-1">
+              <button (click)="onInvoiceLogTabChange('Invoice log')" 
+                      class="flex justify-center items-start flex-1 h-full">
+                <div class="flex p-1.5 px-4 justify-center items-center gap-2 flex-1 rounded-lg h-full"
+                     [class]="invoiceLogActiveTab() === 'Invoice log' ? 'bg-primary-teal-light' : 'bg-white'">
+                  <div class="text-center font-bai-jamjuree text-sm font-semibold"
+                       [class]="invoiceLogActiveTab() === 'Invoice log' ? 'text-primary-teal' : 'text-neutrals-300'">Invoice log</div>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div class="flex h-11 items-start gap-4 flex-1">
+            <div class="flex items-start gap-4 flex-1">
+              <button (click)="onInvoiceLogTabChange('Advance deposit')" 
+                      class="flex justify-center items-start flex-1 h-full">
+                <div class="flex p-1.5 px-4 justify-center items-center gap-2 flex-1 rounded-lg h-full"
+                     [class]="invoiceLogActiveTab() === 'Advance deposit' ? 'bg-primary-teal-light' : 'bg-white'">
+                  <div class="text-center font-bai-jamjuree text-sm font-normal"
+                       [class]="invoiceLogActiveTab() === 'Advance deposit' ? 'text-primary-teal' : 'text-neutrals-300'">Advance deposit</div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Invoice Log Table -->
+      <div class="flex flex-col items-start rounded-xl shadow-panel overflow-hidden">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr>
+              <th class="h-13 py-3.5 px-4 text-left border-b border-neutrals-50 bg-white text-black-500 text-sm font-bold font-bai-jamjuree w-12.5">No.</th>
+              <th class="h-13 py-3.5 px-4 text-left border-b border-neutrals-50 bg-white text-black-500 text-sm font-bold font-bai-jamjuree flex-1">Building</th>
+              <th class="h-13 py-3.5 px-4 text-left border-b border-neutrals-50 bg-white text-black-500 text-sm font-bold font-bai-jamjuree w-29.75">Floor</th>
+              <th class="h-13 py-3.5 px-4 text-left border-b border-neutrals-50 bg-white text-black-500 text-sm font-bold font-bai-jamjuree w-29.5">Room</th>
+              <th class="h-13 py-3.5 px-4 text-left border-b border-neutrals-50 bg-white text-black-500 text-sm font-bold font-bai-jamjuree w-49.75">Period</th>
+              <th class="h-13 py-3.5 px-4 text-left border-b border-neutrals-50 bg-white text-black-500 text-sm font-bold font-bai-jamjuree w-49.5">Memo Detail</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of invoiceLogDisplayedItems(); let i = index" class="bg-white">
+              <td class="h-13 py-2 px-4 border-b border-neutrals-50">
+                <div class="flex items-center gap-2 flex-1">
+                  <div class="flex flex-col items-start gap-1 flex-1">
+                    <div class="text-black-500 text-ellipsis font-bai-jamjuree text-sm font-medium w-full overflow-hidden">{{ i + 1 }}</div>
+                  </div>
+                </div>
+              </td>
+              <td class="h-13 py-2 px-4 border-b border-neutrals-50">
+                <div class="flex items-center gap-2 flex-1">
+                  <div class="flex flex-col items-start gap-1 flex-1">
+                    <div class="text-black-500 text-ellipsis font-bai-jamjuree text-sm font-medium w-full overflow-hidden">{{ item.building }}</div>
+                  </div>
+                </div>
+              </td>
+              <td class="h-13 py-2 px-4 border-b border-neutrals-50">
+                <div class="flex items-center gap-2 flex-1">
+                  <div class="flex flex-col items-start gap-1 flex-1">
+                    <div class="text-black-500 text-ellipsis font-bai-jamjuree text-sm font-medium w-full overflow-hidden">{{ item.floor }}</div>
+                  </div>
+                </div>
+              </td>
+              <td class="h-13 py-2 px-4 border-b border-neutrals-50">
+                <div class="flex items-center gap-2 flex-1">
+                  <div class="flex flex-col items-start gap-1 flex-1">
+                    <div class="text-black-500 text-ellipsis font-bai-jamjuree text-sm font-medium w-full overflow-hidden">{{ item.room }}</div>
+                  </div>
+                </div>
+              </td>
+              <td class="h-13 py-2 px-4 border-b border-neutrals-50">
+                <div class="flex items-center gap-2">
+                  <div class="flex w-55 flex-col items-start gap-1">
+                    <div class="text-black-500 font-bai-jamjuree text-sm font-medium">{{ item.period }}</div>
+                  </div>
+                </div>
+              </td>
+              <td class="h-13 py-2 px-4 border-b border-neutrals-50">
+                <div class="flex items-center gap-2 flex-1">
+                  <div class="flex flex-col items-start gap-1 flex-1">
+                    <button (click)="onMemoDetailClick(item)" 
+                            class="text-blue-500 font-bai-jamjuree text-sm font-medium underline hover:text-blue-600 transition-colors">{{ item.memoDetail }}</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Invoice Log Pagination -->
+        <div class="flex py-4.5 px-6 items-center gap-3 w-full border-t border-neutrals-50 bg-white">
+          <div class="flex items-center gap-2 flex-1">
+            <div class="flex items-center gap-2.5">
+              <div class="flex items-center gap-2">
+                <div class="flex items-center gap-4">
+                  <div class="text-gray-500 text-center font-bai-jamjuree text-xs font-semibold">Showing</div>
+                  <div class="flex items-start">
+                    <div class="flex h-8 py-1.5 px-4 items-center gap-2 rounded-lg border border-neutrals-50 bg-white">
+                      <div class="text-neutrals-300 text-center font-bai-jamjuree text-xs font-semibold">{{ invoiceLogItemsPerPage() }}</div>
+                      <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6L8 10L12 6" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="text-gray-500 text-center font-bai-jamjuree text-xs font-semibold">from {{ invoiceLog().length }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <app-pagination
+            [currentPage]="invoiceLogCurrentPage()"
+            [totalPages]="invoiceLogTotalPages"
+            [totalItems]="invoiceLog().length"
+            [itemsPerPage]="invoiceLogItemsPerPage()"
+            (pageChange)="onInvoiceLogPageChange($event)"
+            (itemsPerPageChange)="onInvoiceLogItemsPerPageChange($event)">
+          </app-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

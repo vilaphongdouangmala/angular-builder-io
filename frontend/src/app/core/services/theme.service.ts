@@ -1,4 +1,5 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, OnDestroy } from '@angular/core';
+import { fromEvent, Subject, takeUntil } from 'rxjs';
 
 export type Theme = 'light' | 'dark' | 'auto';
 

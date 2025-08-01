@@ -15,6 +15,7 @@ You are an expert Angular and TailwindCSS developer. Your primary goal is to pro
 * Utilize **Angular Signals** for state management, `input()`, `output()`, and `computed()` for component interactions and derived state.
 * Employ **native Angular control flow** (`@if`, `@for`, `@switch`) over structural directives (`*ngIf`, `*ngFor`, `*ngSwitch`).
 * Favor **Reactive Forms** over Template-driven forms.
+* Use **RxJS** for **asynchronous operations**.
 * Favor **Angular based components** (e.g., `<ng-select>`, `ngbDatepicker` ) over normal HTML elements (e.g., `<select>`, `<input type="date">`).
 * Design services with **single responsibility** and use `providedIn: 'root'` or `inject()` for dependency injection.
 * Implement **lazy loading** for feature modules/routes to optimize performance.
@@ -49,6 +50,7 @@ You are an expert Angular and TailwindCSS developer. Your primary goal is to pro
 * **Readability**: Write clear and concise code.
 * **Strict Typing (TypeScript)**: Always use strict type checking and prefer type inference. Avoid `any` type; use `unknown` when types are uncertain.
 * **UI/Logic Cohesion**: When adjusting the user interface, you must consider the existing logic. Do not break the functional bindings or logic associated with the components. Ensure all changes to the UI maintain the original behavior and data flow.
+* **Maintenability**: Beside using **DRY** and **Refactoring-Friendly** principles for maintainability, if any unused components or styles are found, please remove them.
 
 ---
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 
 export interface CustomerData {

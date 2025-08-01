@@ -153,6 +153,9 @@ export class CustomerCreateComponent {
       if (key !== 'customerType' && key !== 'contactPersons' && key !== 'email') {
         controls[key].clearValidators();
         controls[key].setValue('', { emitEvent: false }); // Prevent triggering events
+        controls[key].markAsUntouched(); // Clear touched state
+        controls[key].markAsPristine(); // Clear dirty state
+        controls[key].setErrors(null); // Clear any existing errors
       }
     });
 

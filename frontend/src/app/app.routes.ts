@@ -14,6 +14,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/customer/customer.component').then(m => m.CustomerComponent)
       },
       {
+        path: 'customer/create',
+        loadComponent: () => import('./features/customer/customer-create/customer-create.component').then(m => m.CustomerCreateComponent)
+      },
+      {
         path: '',
         redirectTo: '/customer',
         pathMatch: 'full'

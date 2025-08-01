@@ -68,18 +68,18 @@ export class CustomerCreateComponent {
   }
 
   createContactPersonGroup(isCompany: boolean = false): FormGroup {
-    const group = this.fb.group({
+    const baseControls: any = {
       contactName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       remarks: ['']
-    });
+    };
 
     // Add withholding tax field only for company customers
     if (isCompany) {
-      group.addControl('withholdingTax', this.fb.control(0));
+      baseControls.withholdingTax = [0];
     }
 
-    return group;
+    return this.fb.group(baseControls);
   }
 
   get contactPersons(): FormArray {

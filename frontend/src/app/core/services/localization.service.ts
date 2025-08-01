@@ -236,6 +236,10 @@ export class LocalizationService {
           emailAddress: 'Email address',
           remarks: 'Remarks',
           pleaseSpecify: 'Please Specify'
+        },
+        actions: {
+          edit: 'Edit',
+          delete: 'Delete'
         }
       },
       validation: {

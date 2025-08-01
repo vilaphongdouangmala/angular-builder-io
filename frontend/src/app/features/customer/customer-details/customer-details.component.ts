@@ -1,8 +1,10 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, takeUntil, switchMap, tap, catchError, EMPTY } from 'rxjs';
 import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
 import { TabsComponent } from '../../../shared/components/tabs/tabs.component';
+import { CustomerDataService, CustomerData } from '../../../core/services/customer-data.service';
 
 export interface CustomerDetails {
   id: number;
@@ -49,9 +51,14 @@ export interface InvoiceLog {
   templateUrl: './customer-details.component.html',
   styleUrl: './customer-details.component.scss'
 })
-export class CustomerDetailsComponent implements OnInit {
+export class CustomerDetailsComponent implements OnInit, OnDestroy {
+  private customerDataService = inject(CustomerDataService);
+  private destroy$ = new Subject<void>();
+
   customerId = signal<number | null>(null);
   customer = signal<CustomerDetails | null>(null);
+  loading = signal<boolean>(false);
+  error = signal<string | null>(null);
   
   // Contact persons data
   contactPersons = signal<ContactPerson[]>([
@@ -105,55 +112,95 @@ export class CustomerDetailsComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      const id = +params['id'];
-      this.customerId.set(id);
-      this.loadCustomer(id);
+  ngOnInit(): void {
+    this.setupCustomerData();
+    this.setupLoadingAndError();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private setupCustomerData(): void {
+    this.route.params.pipe(
+      switchMap(params => {
+        const id = +params['id'];
+        this.customerId.set(id);
+        return this.customerDataService.getCustomerById(id).pipe(
+          tap(customerData => {
+            // Transform CustomerData to CustomerDetails
+            const customerDetails: CustomerDetails = {
+              id: customerData.id,
+              name: customerData.name,
+              firstName: customerData.name.split(' ')[0] || '',
+              lastName: customerData.name.split(' ').slice(1).join(' ') || '',
+              prefix: 'Miss', // Default value
+              customerType: 'Individual', // Default value
+              taxId: '1-2340-56789-12-3', // Mock value
+              email: customerData.email,
+              phone: customerData.phone,
+              avatar: 'https://api.builder.io/api/v1/image/assets/TEMP/5152d03586dd9cd285089719752cf2ff60ea8be7?width=64'
+            };
+            this.customer.set(customerDetails);
+          }),
+          catchError(error => {
+            console.error('Error loading customer:', error);
+            this.error.set('Failed to load customer details');
+            return EMPTY;
+          })
+        );
+      }),
+      takeUntil(this.destroy$)
+    ).subscribe();
+  }
+
+  private setupLoadingAndError(): void {
+    // Subscribe to loading state
+    this.customerDataService.loading$.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(loading => {
+      this.loading.set(loading);
+    });
+
+    // Subscribe to error state
+    this.customerDataService.error$.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(error => {
+      if (error) {
+        this.error.set(error);
+      }
     });
   }
 
-  loadCustomer(id: number) {
-    // Mock customer data - in real app, this would come from a service
-    const mockCustomer: CustomerDetails = {
-      id,
-      name: 'Khemika Issarapharb',
-      firstName: 'Khemika',
-      lastName: 'Isaraphap',
-      prefix: 'Miss',
-      customerType: 'Individual',
-      taxId: '1-2340-56789-12-3',
-      email: 'khemmika.i@codium.co',
-      phone: '064-445-4565',
-      avatar: 'https://api.builder.io/api/v1/image/assets/TEMP/5152d03586dd9cd285089719752cf2ff60ea8be7?width=64'
-    };
-    
-    this.customer.set(mockCustomer);
-  }
-
-  onBack() {
+  onBack(): void {
     this.router.navigate(['/customer']);
   }
 
-  onEdit() {
-    console.log('Edit customer:', this.customer());
+  onEdit(): void {
+    const customer = this.customer();
+    if (customer) {
+      console.log('Edit customer:', customer);
+      // Navigate to edit page
+      this.router.navigate(['/customer/edit', customer.id]);
+    }
   }
 
-  onMoreActions() {
+  onMoreActions(): void {
     console.log('More actions for customer:', this.customer());
   }
 
   // Room history methods
-  onRoomHistoryTabChange(tab: 'Owner' | 'Tenant') {
+  onRoomHistoryTabChange(tab: 'Owner' | 'Tenant'): void {
     this.roomHistoryActiveTab.set(tab);
     this.roomHistoryCurrentPage.set(1);
   }
 
-  onRoomHistoryPageChange(page: number) {
+  onRoomHistoryPageChange(page: number): void {
     this.roomHistoryCurrentPage.set(page);
   }
 
-  onRoomHistoryItemsPerPageChange(items: number) {
+  onRoomHistoryItemsPerPageChange(items: number): void {
     this.roomHistoryItemsPerPage.set(items);
     this.roomHistoryCurrentPage.set(1);
   }
@@ -169,16 +216,16 @@ export class CustomerDetailsComponent implements OnInit {
   }
 
   // Invoice log methods
-  onInvoiceLogTabChange(tab: 'Invoice log' | 'Advance deposit') {
+  onInvoiceLogTabChange(tab: 'Invoice log' | 'Advance deposit'): void {
     this.invoiceLogActiveTab.set(tab);
     this.invoiceLogCurrentPage.set(1);
   }
 
-  onInvoiceLogPageChange(page: number) {
+  onInvoiceLogPageChange(page: number): void {
     this.invoiceLogCurrentPage.set(page);
   }
 
-  onInvoiceLogItemsPerPageChange(items: number) {
+  onInvoiceLogItemsPerPageChange(items: number): void {
     this.invoiceLogItemsPerPage.set(items);
     this.invoiceLogCurrentPage.set(1);
   }
@@ -193,7 +240,7 @@ export class CustomerDetailsComponent implements OnInit {
     return Math.ceil(this.invoiceLog().length / this.invoiceLogItemsPerPage());
   }
 
-  onMemoDetailClick(item: InvoiceLog) {
+  onMemoDetailClick(item: InvoiceLog): void {
     console.log('View memo detail:', item);
   }
 }

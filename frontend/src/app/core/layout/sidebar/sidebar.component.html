@@ -1,0 +1,95 @@
+<div class="flex w-64 py-4 px-2.5 flex-col justify-end items-start gap-6 self-stretch border-r border-gray-100 bg-white shadow-lg overflow-y-auto">
+  <div class="flex flex-col items-start gap-2 self-stretch">
+    <!-- Navigation Sections -->
+    <div class="flex flex-col items-start gap-5 self-stretch">
+      <!-- Main Nav -->
+      <div class="flex flex-col items-start gap-2 self-stretch">
+        <div class="flex flex-col items-start gap-2 self-stretch">
+          <div *ngFor="let item of mainNavItems" 
+               class="flex h-12 px-4 pr-4 pl-1.5 items-center gap-2 self-stretch rounded-lg bg-white cursor-pointer hover:bg-gray-50 transition-colors"
+               [class.bg-red-50]="item.active">
+            <span class="text-gray-600 font-normal text-base flex-1"
+                  [class.text-teal-700]="item.active"
+                  [class.font-semibold]="item.active">{{ item.label }}</span>
+            <div *ngIf="item.badge" class="flex h-4 px-1 items-center rounded-full border"
+                 [class.border-gray-300]="item.badgeType === 'default'"
+                 [class.bg-white]="item.badgeType === 'default'"
+                 [class.border-red-50]="item.badgeType === 'alert'"
+                 [class.bg-red-50]="item.badgeType === 'alert'">
+              <span class="text-xs font-bold"
+                    [class.text-neutrals-200]="item.badgeType === 'default'"
+                    [class.text-red-500]="item.badgeType === 'alert'">{{ item.badge }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-60 h-px bg-gray-300"></div>
+
+    <!-- Management Section -->
+    <div class="flex flex-col items-start gap-2 self-stretch">
+      <div class="flex h-12 px-4 pr-4 pl-1.5 justify-between items-center self-stretch rounded-lg bg-white cursor-pointer hover:bg-gray-50 transition-colors">
+        <span class="text-gray-600 font-normal text-base">Management</span>
+      </div>
+      
+      <div *ngFor="let item of managementItems"
+           class="flex h-12 px-4 pr-4 pl-5 items-center gap-2 self-stretch rounded-lg cursor-pointer hover:bg-gray-50 relative transition-colors"
+           [class.bg-gray-50]="item.active"
+           (click)="onNavItemClick(item)">
+        <!-- Active indicator -->
+        <div *ngIf="item.active" class="absolute left-0 top-0.5 bottom-0.5 w-0.5 bg-primary-teal rounded-r"></div>
+
+        <svg *ngIf="item.icon" class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+          <ng-container [ngSwitch]="item.icon">
+            <g *ngSwitchCase="'database'">
+              <path d="M4 6V12C4 12 4 15 11 15C18 15 18 12 18 12V6" [attr.stroke]="item.active ? '#175252' : '#55596D'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11 3C18 3 18 6 18 6C18 6 18 9 11 9C4 9 4 6 4 6C4 6 4 3 11 3Z" [attr.stroke]="item.active ? '#175252' : '#55596D'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <g *ngSwitchCase="'group'">
+              <path d="M1 20V19C1 15.134 4.13401 12 8 12V12C11.866 12 15 15.134 15 19V20" [attr.stroke]="item.active ? '#175252' : '#55596D'" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M13 14V14C13 11.2386 15.2386 9 18 9V9C20.7614 9 23 11.2386 23 14V14.5" [attr.stroke]="item.active ? '#175252' : '#55596D'" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M8 12C10.2091 12 12 10.2091 12 8C12 5.79086 10.2091 4 8 4C5.79086 4 4 5.79086 4 8C4 10.2091 5.79086 12 8 12Z" [attr.stroke]="item.active ? '#175252' : '#55596D'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M18 9C19.6569 9 21 7.65685 21 6C21 4.34315 19.6569 3 18 3C16.3431 3 15 4.34315 15 6C15 7.65685 16.3431 9 18 9Z" [attr.stroke]="item.active ? '#175252' : '#55596D'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <path *ngSwitchDefault d="M1 2.38419e-07V-1C1 -4.86599 4.13401 -8 8 -8V-8C11.866 -8 15 -4.86599 15 -1V2.38419e-07" stroke="#55596D" stroke-width="1.5" stroke-linecap="round"/>
+          </ng-container>
+        </svg>
+
+        <span class="text-gray-600 font-normal text-base flex-1"
+              [class.text-teal-700]="item.active"
+              [class.font-semibold]="item.active">{{ item.label }}</span>
+      </div>
+    </div>
+
+    <div class="w-60 h-px bg-gray-300"></div>
+
+    <!-- Dashboard Section -->
+    <div class="flex flex-col items-start gap-2 self-stretch">
+      <div *ngFor="let item of dashboardItems" 
+           class="flex h-12 px-4 pr-4 pl-1.5 justify-between items-center self-stretch rounded-lg bg-white cursor-pointer hover:bg-gray-50 transition-colors">
+        <div class="flex items-center gap-2">
+          <svg *ngIf="item.icon" class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+            <path d="M9 21H15M9 21V16M9 21H3.6C3.26863 21 3 20.7314 3 20.4V16.6C3 16.2686 3.26863 16 3.6 16H9M15 21V9M15 21H20.4C20.7314 21 21 20.7314 21 20.4V3.6C21 3.26863 20.7314 3 20.4 3H15.6C15.2686 3 15 3.26863 15 3.6V9M15 9H9.6C9.26863 9 9 9.26863 9 9.6V16" stroke="#55596D" stroke-width="1.5"/>
+          </svg>
+          <span class="text-gray-600 font-normal text-base">{{ item.label }}</span>
+        </div>
+        <div *ngIf="item.badge" class="flex h-4 px-1 items-center rounded-full border-red-50 bg-red-50">
+          <span class="text-red-500 text-xs font-bold">{{ item.badge }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-60 h-px bg-gray-300"></div>
+
+    <!-- Contact Section -->
+    <div class="flex flex-col items-start gap-2 self-stretch">
+      <div class="flex h-12 px-4 pr-4 pl-1.5 items-center gap-2 self-stretch rounded-lg bg-white cursor-pointer hover:bg-gray-50 transition-colors">
+        <span class="text-gray-600 font-normal text-base">e-Contact</span>
+        <div class="flex h-4 px-1 items-center rounded-full border border-gray-300 bg-white">
+          <span class="text-gray-500 text-xs font-bold">3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

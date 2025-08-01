@@ -1,0 +1,91 @@
+<div class="flex py-4 px-6 items-center gap-3 self-stretch border-t border-gray-200 bg-white">
+  <!-- Pagination Info -->
+  <div class="flex items-center gap-2 flex-1">
+    <span class="text-gray-500 text-xs font-bold">Showing</span>
+    <div class="relative">
+      <select class="h-8 py-1.5 px-4 pr-8 rounded-lg border border-gray-200 bg-white text-gray-600 text-xs font-bold appearance-none cursor-pointer hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
+              [value]="itemsPerPage" 
+              (change)="onItemsPerPageChange($event)">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+      </select>
+      <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+        <svg class="w-4 h-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </div>
+    </div>
+    <span class="text-gray-500 text-xs font-bold">from {{ totalItems }}</span>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="flex items-center gap-2 w-114.25">
+    <!-- First Page -->
+    <button class="flex h-8 p-2 items-center rounded-lg border border-gray-200 bg-white cursor-pointer disabled:opacity-50 hover:bg-gray-50 disabled:hover:bg-white transition-colors"
+            [disabled]="currentPage === 1"
+            (click)="onPageChange(1)">
+      <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
+        <path d="M7.33334 4L3.33334 8L7.33334 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12.6667 4L8.66666 8L12.6667 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <!-- Previous Page -->
+    <button class="flex h-8 p-2 items-center rounded-lg border border-gray-200 bg-white cursor-pointer disabled:opacity-50 hover:bg-gray-50 disabled:hover:bg-white transition-colors"
+            [disabled]="currentPage === 1"
+            (click)="onPageChange(currentPage - 1)">
+      <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
+        <path d="M10 4L6 8L10 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <!-- Page Numbers -->
+    <button *ngFor="let page of getVisiblePages()" 
+            class="flex w-8 h-8 py-1.5 px-4 justify-center items-center rounded-lg border cursor-pointer text-xs font-bold transition-colors hover:bg-gray-50"
+            [class.border-teal-600]="page === currentPage"
+            [class.bg-teal-50]="page === currentPage"
+            [class.text-teal-700]="page === currentPage"
+            [class.border-gray-200]="page !== currentPage"
+            [class.bg-white]="page !== currentPage"
+            [class.text-gray-600]="page !== currentPage"
+            (click)="onPageChange(page)">
+      {{ page }}
+    </button>
+
+    <!-- Next Page -->
+    <button class="flex h-8 p-2 items-center rounded-lg border border-gray-200 bg-white cursor-pointer disabled:opacity-50 hover:bg-gray-50 disabled:hover:bg-white transition-colors"
+            [disabled]="currentPage === totalPages"
+            (click)="onPageChange(currentPage + 1)">
+      <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
+        <path d="M6 4L10 8L6 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <!-- Last Page -->
+    <button class="flex h-8 p-2 items-center rounded-lg border border-gray-200 bg-white cursor-pointer disabled:opacity-50 hover:bg-gray-50 disabled:hover:bg-white transition-colors"
+            [disabled]="currentPage === totalPages"
+            (click)="onPageChange(totalPages)">
+      <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none">
+        <path d="M8.66667 4L12.6667 8L8.66667 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3.33333 4L7.33333 8L3.33333 12" stroke="#55596D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <!-- Page Selector -->
+    <div class="relative">
+      <select class="flex h-8 py-1.5 px-4 pr-8 justify-between items-center flex-1 rounded-lg border border-gray-200 bg-white text-gray-600 text-xs font-bold appearance-none cursor-pointer hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
+              [value]="currentPage"
+              (change)="onPageChange(+$any($event.target).value)">
+        <option *ngFor="let page of getAllPages()" [value]="page">{{ page }}</option>
+      </select>
+      <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+        <svg class="w-4 h-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </div>
+    </div>
+
+    <span class="text-gray-500 text-xs font-bold">of {{ totalPages }} pages</span>
+  </div>
+</div>

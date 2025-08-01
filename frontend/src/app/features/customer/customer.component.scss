@@ -1,0 +1,26 @@
+// Component-specific styles for the customer component
+// Using Tailwind utilities in the template, adding custom styles only when needed
+
+.customer-container {
+  // Any custom styles if needed
+}
+
+// Custom scrollbar for the table if needed
+.table-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

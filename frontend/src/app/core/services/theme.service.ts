@@ -185,10 +185,18 @@ export class ThemeService implements OnDestroy {
     document.body.classList.add(isDark ? 'theme-dark' : 'theme-light');
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   private setupMediaQueryListener(): void {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    mediaQuery.addEventListener('change', () => {
+
+    // Use RxJS to handle media query changes
+    fromEvent(mediaQuery, 'change').pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
       if (this._currentTheme() === 'auto') {
         this.applyAutoTheme();
       }

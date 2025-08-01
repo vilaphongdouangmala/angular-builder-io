@@ -24,9 +24,10 @@ export interface ThemeConfig {
 @Injectable({
   providedIn: 'root'
 })
-export class ThemeService {
+export class ThemeService implements OnDestroy {
   private readonly THEME_STORAGE_KEY = 'selected-theme';
-  
+  private destroy$ = new Subject<void>();
+
   // Theme signal
   private _currentTheme = signal<Theme>('light');
   

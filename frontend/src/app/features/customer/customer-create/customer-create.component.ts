@@ -172,6 +172,10 @@ export class CustomerCreateComponent {
     });
   }
 
+  hasWithholdingTax(index: number): boolean {
+    return this.contactPersons.at(index)?.get('withholdingTax') !== null;
+  }
+
   private updateContactPersonsForCustomerType(customerType: string) {
     const isCompany = customerType === 'company';
     const currentContacts = this.contactPersons.controls;

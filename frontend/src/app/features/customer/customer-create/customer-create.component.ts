@@ -159,8 +159,11 @@ export class CustomerCreateComponent {
       }
     });
 
-    // Always keep email validation
+    // Always keep email validation but clear its state
     controls['email'].setValidators([Validators.required, Validators.email]);
+    controls['email'].markAsUntouched();
+    controls['email'].markAsPristine();
+    controls['email'].setErrors(null);
 
     // Add validators based on customer type
     if (customerType === 'individual') {

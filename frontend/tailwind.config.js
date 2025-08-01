@@ -9,6 +9,7 @@ module.exports = {
         'bg-gray': '#F9F9FC',
         'neutrals': {
           50: '#EAEAED',
+          100: '#BDBFC7',
           200: '#9DA0AB',
           300: '#707485',
           400: '#55596D',

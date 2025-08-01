@@ -50,10 +50,10 @@ export class CustomerCreateComponent {
       companyTypeOther: [''],
       companyName: [''],
       // Common fields
-      email: [''],
+      email: ['', [Validators.required, Validators.email]],
       phoneNo: [''],
       contactPersons: this.fb.array([
-        this.createContactPersonGroup()
+        this.createContactPersonGroup(false)
       ])
     });
 
@@ -146,22 +146,23 @@ export class CustomerCreateComponent {
 
     // Clear all validators first
     Object.keys(controls).forEach(key => {
-      if (key !== 'customerType' && key !== 'contactPersons') {
+      if (key !== 'customerType' && key !== 'contactPersons' && key !== 'email') {
         controls[key].clearValidators();
         controls[key].setValue(''); // Clear values when switching types
       }
     });
+
+    // Always keep email validation
+    controls['email'].setValidators([Validators.required, Validators.email]);
 
     // Add validators based on customer type
     if (customerType === 'individual') {
       controls['prefix'].setValidators([Validators.required]);
       controls['firstName'].setValidators([Validators.required]);
       controls['lastName'].setValidators([Validators.required]);
-      controls['email'].setValidators([Validators.required, Validators.email]);
     } else if (customerType === 'company') {
       controls['companyType'].setValidators([Validators.required]);
       controls['companyName'].setValidators([Validators.required]);
-      controls['email'].setValidators([Validators.required, Validators.email]);
       controls['phoneNo'].setValidators([Validators.required]);
     }
 

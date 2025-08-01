@@ -5,8 +5,8 @@
   display: contents;
 }
 
-.dialog-shadow {
-  box-shadow: 
-    0 1px 18px 0 rgba(181, 201, 235, 0.21), 
+:host ::ng-deep .dialog-shadow {
+  box-shadow:
+    0 1px 18px 0 rgba(181, 201, 235, 0.21),
     0 3px 5px 0 rgba(132, 147, 198, 0.12);
 }

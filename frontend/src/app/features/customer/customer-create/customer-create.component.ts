@@ -1,9 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject, takeUntil, switchMap, tap, catchError, EMPTY } from 'rxjs';
 import { LocalizationService } from '../../../core/services/localization.service';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
+import { CustomerDataService, CustomerData } from '../../../core/services/customer-data.service';
 
 export interface ContactPerson {
   contactName: string;
@@ -25,9 +27,11 @@ export interface CompanyContactPerson {
   templateUrl: './customer-create.component.html',
   styleUrl: './customer-create.component.scss'
 })
-export class CustomerCreateComponent {
+export class CustomerCreateComponent implements OnDestroy {
   customerForm: FormGroup;
   private isUpdatingValidators = false;
+  private destroy$ = new Subject<void>();
+  private customerDataService = inject(CustomerDataService);
 
   localizationService = inject(LocalizationService);
 
@@ -63,7 +67,9 @@ export class CustomerCreateComponent {
     });
 
     // Update validators when customer type changes
-    this.customerForm.get('customerType')?.valueChanges.subscribe(type => {
+    this.customerForm.get('customerType')?.valueChanges.pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(type => {
       if (!this.isUpdatingValidators) {
         this.updateValidators(type);
         this.updateContactPersonsForCustomerType(type);
@@ -89,6 +95,11 @@ export class CustomerCreateComponent {
     return this.fb.group(baseControls);
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   get contactPersons(): FormArray {
     return this.customerForm.get('contactPersons') as FormArray;
   }
@@ -112,16 +123,34 @@ export class CustomerCreateComponent {
     this.router.navigate(['/customer']);
   }
 
-  onSave() {
+  onSave(): void {
     if (this.customerForm.valid) {
-      console.log('Customer data:', this.customerForm.value);
-      console.log("Call API to backend");
-      const isSuccess = true;
-      if (isSuccess) {
-        console.log("sucessfully created customer")
-      }
-      // Here you would typically save the data to a service
-      this.router.navigate(['/customer']);
+      const formValue = this.customerForm.value;
+
+      // Transform form data to CustomerData format
+      const customerData: Omit<CustomerData, 'id'> = {
+        name: formValue.customerType === 'individual'
+          ? `${formValue.firstName} ${formValue.lastName}`.trim()
+          : formValue.companyName,
+        roomNumber: '12345', // Default value - would typically come from another field
+        email: formValue.email,
+        phone: formValue.phoneNo || '000-000-0000',
+        residentType: 'Owner' // Default value - would typically come from form
+      };
+
+      this.customerDataService.createCustomer(customerData).pipe(
+        tap(() => {
+          console.log('Successfully created customer');
+        }),
+        takeUntil(this.destroy$),
+        catchError(error => {
+          console.error('Error creating customer:', error);
+          // Here you might want to show a toast notification or error message
+          return EMPTY;
+        })
+      ).subscribe(() => {
+        this.router.navigate(['/customer']);
+      });
     } else {
       // Mark all fields as touched to show validation errors
       this.customerForm.markAllAsTouched();

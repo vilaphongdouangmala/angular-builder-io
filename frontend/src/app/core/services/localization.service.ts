@@ -1,4 +1,5 @@
 import { Injectable, signal, computed } from '@angular/core';
+import { Observable, of, BehaviorSubject, throwError, from, defer, EMPTY, catchError, map, switchMap, tap, delay } from 'rxjs';
 
 export type SupportedLanguage = 'en' | 'th' | 'zh' | 'ja';
 
@@ -84,13 +85,19 @@ export class LocalizationService {
   /**
    * Set the application language
    */
-  async setLanguage(language: SupportedLanguage): Promise<void> {
-    if (this.languages[language]) {
-      this._currentLanguage.set(language);
-      this.saveLanguagePreference(language);
-      await this.loadTranslations(language);
-      this.applyLanguageSettings(language);
+  setLanguage(language: SupportedLanguage): Observable<void> {
+    if (!this.languages[language]) {
+      return throwError(() => new Error(`Language '${language}' is not supported`));
     }
+
+    return this.loadTranslations(language).pipe(
+      tap(() => {
+        this._currentLanguage.set(language);
+        this.saveLanguagePreference(language);
+        this.applyLanguageSettings(language);
+      }),
+      map(() => void 0)
+    );
   }
 
   /**
@@ -131,18 +138,20 @@ export class LocalizationService {
   /**
    * Load translations for a specific language
    */
-  async loadTranslations(language: SupportedLanguage): Promise<void> {
-    try {
-      // In a real app, this would load from a server or translation files
-      const translationData = await this.fetchTranslations(language);
-      
-      this.translations.update(current => ({
-        ...current,
-        [language]: translationData
-      }));
-    } catch (error) {
-      console.error(`Failed to load translations for ${language}:`, error);
-    }
+  loadTranslations(language: SupportedLanguage): Observable<void> {
+    return this.fetchTranslations(language).pipe(
+      tap(translationData => {
+        this.translations.update(current => ({
+          ...current,
+          [language]: translationData
+        }));
+      }),
+      map(() => void 0),
+      catchError(error => {
+        console.error(`Failed to load translations for ${language}:`, error);
+        return EMPTY;
+      })
+    );
   }
 
   /**
@@ -266,11 +275,15 @@ export class LocalizationService {
     });
   }
 
-  private async fetchTranslations(language: SupportedLanguage): Promise<TranslationKeys> {
+  private fetchTranslations(language: SupportedLanguage): Observable<TranslationKeys> {
     // In a real application, this would fetch from a translation service or files
-    // For now, return the cached translations or empty object
-    const current = this.translations();
-    return current[language] || {};
+    // Simulate async operation with observable
+    return defer(() => {
+      const current = this.translations();
+      return of(current[language] || {}).pipe(
+        delay(100) // Simulate network delay
+      );
+    });
   }
 
   private getNestedValue(obj: any, path: string): string | undefined {

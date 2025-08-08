@@ -26,7 +26,7 @@
                 type="text" 
                 placeholder="Building name" 
                 class="flex-1 border-none outline-none text-gray-700 text-base font-normal bg-transparent placeholder-gray-400"
-                [value]="searchText"
+                [value]="searchText()"
                 (input)="onSearch($event)"
               />
             </div>
@@ -51,17 +51,17 @@
       </div>
 
       <!-- Data Table -->
-      <app-data-table 
-        [columns]="columns" 
-        [data]="buildingData">
+      <app-data-table
+        [columns]="columns"
+        [data]="displayedData">
       </app-data-table>
 
       <!-- Pagination -->
-      <app-pagination 
-        [currentPage]="currentPage"
-        [totalPages]="totalPages"
-        [totalItems]="totalItems"
-        [itemsPerPage]="itemsPerPage"
+      <app-pagination
+        [currentPage]="currentPage()"
+        [totalPages]="totalPages()"
+        [totalItems]="totalItems()"
+        [itemsPerPage]="itemsPerPage()"
         (pageChange)="onPageChange($event)"
         (itemsPerPageChange)="onItemsPerPageChange($event)">
       </app-pagination>

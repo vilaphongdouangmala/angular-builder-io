@@ -1,4 +1,5 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, OnDestroy } from '@angular/core';
+import { fromEvent, Subject, takeUntil } from 'rxjs';
 
 export type Theme = 'light' | 'dark' | 'auto';
 
@@ -23,9 +24,10 @@ export interface ThemeConfig {
 @Injectable({
   providedIn: 'root'
 })
-export class ThemeService {
+export class ThemeService implements OnDestroy {
   private readonly THEME_STORAGE_KEY = 'selected-theme';
-  
+  private destroy$ = new Subject<void>();
+
   // Theme signal
   private _currentTheme = signal<Theme>('light');
   
@@ -183,10 +185,18 @@ export class ThemeService {
     document.body.classList.add(isDark ? 'theme-dark' : 'theme-light');
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   private setupMediaQueryListener(): void {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    mediaQuery.addEventListener('change', () => {
+
+    // Use RxJS to handle media query changes
+    fromEvent(mediaQuery, 'change').pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(() => {
       if (this._currentTheme() === 'auto') {
         this.applyAutoTheme();
       }

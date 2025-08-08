@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LocalizationService, SupportedLanguage } from '../../../core/services/localization.service';
 import { TranslatePipe } from '../../pipes/translate.pipe';
+import { EMPTY, catchError } from 'rxjs';
 
 @Component({
   selector: 'app-language-switcher',
@@ -67,8 +68,14 @@ export class LanguageSwitcherComponent {
     this.isOpen = false;
   }
 
-  async setLanguage(language: SupportedLanguage): Promise<void> {
-    await this.localizationService.setLanguage(language);
-    this.closeDropdown();
+  setLanguage(language: SupportedLanguage): void {
+    this.localizationService.setLanguage(language).pipe(
+      catchError(error => {
+        console.error('Failed to set language:', error);
+        return EMPTY;
+      })
+    ).subscribe(() => {
+      this.closeDropdown();
+    });
   }
 }
